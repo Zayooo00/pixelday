@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function SignUp() {
+  const handleSignUp = async () => {};
+
   return (
     <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
       <Link href={"/"} className="-mt-52">
@@ -36,7 +38,7 @@ export default function SignUp() {
           />
         </label>
         <button
-          onClick={""}
+          onClick={handleSignUp}
           className="px-4 py-1 mt-6 text-xl text-yellow-700 bg-white rounded-md border-solid border-4 border-yellow-700 transform transition-transform duration-500 hover:scale-110 relative group"
         >
           Sign Up
