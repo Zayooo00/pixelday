@@ -19,11 +19,3 @@ body {
   text-shadow: -8px -8px 0 #d0a96e, 8px -8px 0 #d0a96e, -8px 8px 0 #d0a96e,
     8px 8px 0 #d0a96e, 0 -8px 0 #d0a96e, -8px 0 0 #d0a96e, 0 8px 0 #d0a96e, 8px 0 0 #d0a96e;
 }
-
-.btn-stroke {
-  box-shadow: 0 0 0 10px #ff0000;
-  transition: box-shadow 0.3s ease-in-out;
-}
-.btn-stroke:hover {
-  box-shadow: 0 0 0 20px #ff0000;
-}
