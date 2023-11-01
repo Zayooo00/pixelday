@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={font.className}>
         {" "}
         <div
-          className="flex flex-col items-center justify-center min-h-screen bg-center bg-cover"
+          className="flex flex-col items-center justify-center h-[calc(100dvh)] bg-center bg-cover"
           style={{ backgroundImage: "url(splash-background-1.gif)" }}
         >
           {children}
