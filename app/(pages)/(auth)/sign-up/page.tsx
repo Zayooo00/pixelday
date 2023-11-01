@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SignUp() {
   return (
     <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-      <Link href={"/"} className="-mt-52">
+      <Link href={"/"} className="-mt-16 sm:-mt-52">
         <h1 className="text-6xl sm:text-8xl font-bold text-white text-stroke">
           Pixel Day
         </h1>
