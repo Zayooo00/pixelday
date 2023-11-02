@@ -15,7 +15,15 @@ body {
   overflow-x: hidden;
 }
 
-.text-stroke {
-  text-shadow: -8px -8px 0 #d0a96e, 8px -8px 0 #d0a96e, -8px 8px 0 #d0a96e,
-    8px 8px 0 #d0a96e, 0 -8px 0 #d0a96e, -8px 0 0 #d0a96e, 0 8px 0 #d0a96e, 8px 0 0 #d0a96e;
+.title-text-stroke {
+  text-shadow: -8px -8px 0 #99201c, 8px -8px 0 #99201c, -8px 8px 0 #99201c,
+    8px 8px 0 #99201c, 0 -8px 0 #99201c, -8px 0 0 #99201c, 0 8px 0 #99201c, 8px 0 0 #99201c;
+}
+
+.text-stroke-yellow {
+  text-shadow: -1px -1px 0 #ca8a04, 1px -1px 0 #ca8a04, -1px 1px 0 #ca8a04, 1px 1px 0 #ca8a04;
+}
+
+.text-stroke-orange {
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
