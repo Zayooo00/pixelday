@@ -34,24 +34,25 @@ export default function Dashboard() {
     setSelectedNote(note);
     setIsModalOpen(true);
   };
+
   return (
-    <div className="flex h-[calc(100dvh)] w-11/12 my-32 gap-4">
-      <div className="flex flex-col w-1/4">
-        <NoteSection onNoteClick={handleNoteClick} />
-        <AddQuestSection />
-      </div>
-      <div className="flex flex-col w-2/4">
-        <WelcomeSection />
-        <WeekSection />
-      </div>
-      <div className="flex flex-col w-1/4">
-        <QuestSection />
-      </div>
+    <div className="flex flex-col sm:flex-row h-[calc(100dvh)] w-11/12 my-32 gap-4">
+    <div className="order-3 sm:order-1 flex flex-col w-full sm:w-1/4">
+      <NoteSection onNoteClick={handleNoteClick} />
+      <AddQuestSection />
+    </div>
+    <div className="order-1 sm:order-2 flex flex-col w-full mt-4 sm:mt-0 sm:w-2/4">
+      <WelcomeSection />
+      <WeekSection />
+    </div>
+    <div className="order-2 sm:order-3 flex flex-col w-full sm:w-1/4">
+      <QuestSection />
+    </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <div className="relative">
             <Image
-              src="/../note-bg.png"
+              src="/note-bg.png"
               objectFit="cover"
               width={800}
               height={800}
@@ -64,12 +65,12 @@ export default function Dashboard() {
                 {selectedNote?.title}
               </h1>
               <hr className="xs:mt-2 w-3/5 border-t-2 border-red-600 mb-4" />
-              <p className="w-44 xs:w-64 text-sm xs:text-xl break-words text-black">
+              <p className="w-44 xs:w-64 text-md xs:text-xl break-words text-black">
                 {selectedNote?.content}
               </p>
             </div>
             <AiOutlineClose
-              className="absolute top-8 xs:top-10 right-8 text-xl xs:text-3xl cursor-pointer rounded-md text-black hover:bg-gray-300 transition-colors duration-600"
+              className="absolute top-8 xs:top-10 right-8 text-xl xs:text-3xl cursor-pointer rounded-sm text-black hover:bg-gray-300 transition-colors duration-600"
               onClick={() => setIsModalOpen(false)}
             />
           </div>

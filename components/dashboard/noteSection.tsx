@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { GiJusticeStar } from "react-icons/gi";
 
@@ -44,13 +43,13 @@ export default function NoteSection({
                   colors[index % colors.length]
                 } shadow-md flex items-center justify-center border-2 border-red-900 group lg:max-w-full hover:animate-card-bounce`}
               >
-                {/* <div className="absolute -top-0.5 -left-0.5 w-8 h-8 bg-white border-2 border-red-900 transform origin-top-left rounded-br-full" /> */}
+                <div className="absolute -top-[23.25px] -left-0 w-8 h-8 border-r-2 rotate-45 border-red-900 transform origin-top-left" />
                 <div className="flex-shrink-0 lg:block hidden mr-4">
                   <Image
                     className="xl:block hidden"
                     width={48}
                     height={48}
-                    src="/../app-icon.png"
+                    src="/app-icon.png"
                     alt="Note icon"
                   />
                 </div>
