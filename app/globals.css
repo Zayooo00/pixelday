@@ -15,15 +15,42 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #dcdcdc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fda4af;
+}
+
 .title-text-stroke {
   text-shadow: -8px -8px 0 #99201c, 8px -8px 0 #99201c, -8px 8px 0 #99201c,
-    8px 8px 0 #99201c, 0 -8px 0 #99201c, -8px 0 0 #99201c, 0 8px 0 #99201c, 8px 0 0 #99201c;
+    8px 8px 0 #99201c, 0 -8px 0 #99201c, -8px 0 0 #99201c, 0 8px 0 #99201c,
+    8px 0 0 #99201c;
 }
 
-.text-stroke-yellow {
-  text-shadow: -1px -1px 0 #ca8a04, 1px -1px 0 #ca8a04, -1px 1px 0 #ca8a04, 1px 1px 0 #ca8a04;
+.text-stroke-red {
+  text-shadow: -1px -1px 0 #881337, 1px -1px 0 #881337, -1px 1px 0 #881337,
+    1px 1px 0 #881337;
 }
 
-.text-stroke-orange {
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+.text-stroke-rose {
+  text-shadow: -1px -1px 0 #7f1d1d, 1px -1px 0 #7f1d1d, -1px 1px 0 #7f1d1d,
+    1px 1px 0 #7f1d1d;
+}
+
+@keyframes card-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
