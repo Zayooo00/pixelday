@@ -12,7 +12,7 @@ const config: Config = {
         "card-bounce": "card-bounce 1s infinite",
       },
       screens: {
-        xs: "330px",
+        xs: "400px",
       },
     },
   },
