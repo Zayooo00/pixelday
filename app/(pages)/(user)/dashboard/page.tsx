@@ -51,7 +51,7 @@ export default function Dashboard() {
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <div className="relative">
             <Image
-              src="/../test.png"
+              src="/../note-bg.png"
               objectFit="cover"
               width={800}
               height={800}
