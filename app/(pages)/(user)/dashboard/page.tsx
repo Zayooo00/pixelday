@@ -1,80 +1,80 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { auth } from "@/firebase/firebase";
-import { GiJusticeStar } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+import Image from "next/image";
+
+import NoteSection from "@/components/dashboard/noteSection";
+import AddQuestSection from "@/components/dashboard/addQuestSection";
+import WelcomeSection from "@/components/dashboard/welcomeSection";
+import WeekSection from "@/components/dashboard/weekSection";
+import QuestSection from "@/components/dashboard/questSection";
+import Modal from "@/components/modal";
+
+type Note = {
+  title: string;
+  content: string;
+};
 
 export default function Dashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const router = useRouter();
 
   const signOut = async () => {
     try {
       await auth.signOut();
       router.push("/");
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
+  const handleNoteClick = (note: Note) => {
+    setSelectedNote(note);
+    setIsModalOpen(true);
+  };
   return (
     <div className="flex h-[calc(100dvh)] w-11/12 my-32 gap-4">
       <div className="flex flex-col w-1/4">
-        <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-          <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-          <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
-            Your notes
-          </h1>
-        </div>
-        <div className="h-2/3 border-[10px] border-red-900 bg-amber-50">
-          <div className="w-full h-full p-4 border-2 border-rose-300">
-            <h1>Pixel Day</h1>
-          </div>
-        </div>
-        <div className="flex items-center-x-[10px] border-x-[10px] border-t-[10px] p-2  mt-4 border-red-900 bg-amber-50 border">
-          <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-          <h1 className="text-xl text-red-900 border-2  w-full pl-2 border-red-900 bg-white">
-            Add Quests
-          </h1>
-        </div>
-        <div className="flex flex-col items-center justify-center h-1/3 p-4 space-y-2 border-[10px] border-red-900 bg-amber-50">
-          <button className="p-2 text-amber-50 text-2xl w-4/5 transform transition-transform hover:scale-105 border-t-4 border-x-4 border-b-8 border-red-900 bg-red-500">
-            <h1 className="text-stroke-red">Add Quest</h1>
-          </button>
-          <button className="p-2 text-amber-50 text-2xl w-4/5 transform transition-transform hover:scale-105 border-t-4 border-x-4 border-b-8 border-rose-900 bg-rose-300">
-            <h1 className="h1-text-stroke-orange">Add Recurring Quest</h1>
-          </button>
-        </div>
+        <NoteSection onNoteClick={handleNoteClick} />
+        <AddQuestSection />
       </div>
       <div className="flex flex-col w-2/4">
-        <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-          <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-          <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
-            Welcome again *User*
-          </h1>
-        </div>
-        <div className="h-1/6 p-4 border-[10px] border-red-900 bg-amber-50">
-          <h1>Hi username</h1>
-        </div>
-        <div className="mt-4 flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-          <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-          <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
-            Plan your week
-          </h1>
-        </div>
-        <div className="h-5/6 p-4 border-[10px] border-red-900 bg-amber-50">
-          <h1>Placeholder</h1>
-        </div>
+        <WelcomeSection />
+        <WeekSection />
       </div>
       <div className="flex flex-col w-1/4">
-        <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-          <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-          <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
-            Quests
-          </h1>
-        </div>
-        <div className="h-full p-4 border-[10px] border-red-900 bg-amber-50">
-          <h1>Quests</h1>
-        </div>
+        <QuestSection />
       </div>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <div className="relative">
+            <Image
+              src="/../test.png"
+              objectFit="cover"
+              width={800}
+              height={800}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              quality={100}
+              alt="Note background"
+            />
+            <div className="absolute inset-0 flex flex-col justify-start items-center text-center mt-2 xs:mt-16 p-4">
+              <h1 className="text-4xl xs:text-7xl leading-8 text-black mb-4">
+                {selectedNote?.title}
+              </h1>
+              <hr className="xs:mt-2 w-3/5 border-t-2 border-red-600 mb-4" />
+              <p className="w-44 xs:w-64 text-sm xs:text-xl break-words text-black">
+                {selectedNote?.content}
+              </p>
+            </div>
+            <AiOutlineClose
+              className="absolute top-8 xs:top-10 right-8 text-xl xs:text-3xl cursor-pointer rounded-md text-black hover:bg-gray-300 transition-colors duration-600"
+              onClick={() => setIsModalOpen(false)}
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
