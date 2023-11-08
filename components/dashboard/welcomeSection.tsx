@@ -26,7 +26,7 @@ export default function WelcomeSection({ currentUser }: { currentUser: UserInfo 
         <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
         <h1 className="flex justify-between items-center text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
           <span>
-          Welcome again, <strong>{currentUser ? currentUser.displayName : 'Guest'}</strong>
+          Welcome again, <strong>{currentUser ? currentUser.currentUser?.displayName : 'Guest'}</strong>
           </span>
           <button
             className="mr-1 p-0.5 hover:bg-rose-200 transition-colors duration-600 rounded-full"
