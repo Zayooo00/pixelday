@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { auth } from "@/firebase/firebase";
+import { User } from 'firebase/auth';
 import { AiOutlineClose } from "react-icons/ai";
+import { useEffect } from "react";
 import Image from "next/image";
 
 import NoteSection from "@/components/dashboard/noteSection";
@@ -13,20 +14,27 @@ import WeekSection from "@/components/dashboard/weekSection";
 import QuestSection from "@/components/dashboard/questSection";
 import Modal from "@/components/modal";
 
-import { NoteType } from "@/services/notes/notes-schema";
+import { NoteType } from "@/models/notes-schema";
+import { UserInfo } from "@/models/user-schema";
+import { auth } from "@/firebase/firebase";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newNote, setNewNote] = useState({ title: "", content: "" });
   const [selectedNote, setSelectedNote] = useState<NoteType | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserInfo>({ currentUser: null, uid: '' });
   const router = useRouter();
 
-  const signOut = async () => {
-    try {
-      await auth.signOut();
-      router.push("/");
-    } catch (error) {}
-  };
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUser({ currentUser: user, uid: user.uid });
+      } else {
+        router.push("/sign-in");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
 
   const handleNoteClick = (note: NoteType) => {
     setSelectedNote(note);
@@ -36,11 +44,11 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col sm:flex-row h-[calc(100dvh)] w-11/12 my-32 gap-4">
       <div className="order-3 sm:order-1 flex flex-col w-full sm:w-1/4">
-        <NoteSection onNoteClick={handleNoteClick} />
+        <NoteSection onNoteClick={handleNoteClick} currentUser={currentUser}/>
         <AddQuestSection />
       </div>
       <div className="order-1 sm:order-2 flex flex-col w-full mt-4 sm:mt-0 sm:w-2/4">
-        <WelcomeSection />
+        <WelcomeSection currentUser={currentUser} />
         <WeekSection />
       </div>
       <div className="order-2 sm:order-3 flex flex-col w-full sm:w-1/4">
@@ -51,7 +59,6 @@ export default function Dashboard() {
           <div className="relative">
             <Image
               src="/note-bg.png"
-              objectFit="cover"
               width={800}
               height={800}
               sizes="(max-width: 768px) 100vw, 33vw"

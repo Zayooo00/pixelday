@@ -5,16 +5,19 @@ import { GiJusticeStar } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { ImPlus } from "react-icons/im";
 
-import NoteModal from "../newNoteModal";
+import NoteModal from "@/components/newNoteModal";
 
-import { NoteType } from "@/services/notes/notes-schema";
-import { getNotes } from "@/services/notes/notes";
+import { NoteType } from "@/models/notes-schema";
+import { UserInfo } from "@/models/user-schema";
+import { getNotes } from "@/services/notes";
 
 type NoteClickHandler = (note: NoteType) => void;
 
 export default function NoteSection({
+  currentUser,
   onNoteClick,
 }: {
+  currentUser: UserInfo;
   onNoteClick: NoteClickHandler;
 }) {
   const [notes, setNotes] = useState<NoteType[]>([]);
@@ -23,15 +26,17 @@ export default function NoteSection({
   const handleNoteAdded = (note: any) => {
     setNotes((prevNotes) => [...prevNotes, note]);
   };
-
+  
   useEffect(() => {
     const fetchNotes = async () => {
-      const notes = await getNotes();
-      setNotes(notes);
+      if (currentUser) {
+        const notes = await getNotes(currentUser.uid);
+        setNotes(notes);
+      }
     };
-
+  
     fetchNotes();
-  }, []);
+  }, [currentUser]);
 
   const colors = ["bg-red-500", "bg-emerald-500", "bg-rose-400"];
 
@@ -90,6 +95,7 @@ export default function NoteSection({
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onNoteAdded={handleNoteAdded}
+          uid={currentUser.uid}
         />
       )}
     </>

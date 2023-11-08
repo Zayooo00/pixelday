@@ -59,7 +59,7 @@ export default function SignIn() {
       await signInWithPopup(auth, googleProvider);
       router.push("/dashboard");
     } catch (error) {
-      const { code, message } = error as FirebaseError;
+      const { code } = error as FirebaseError;
       if (code === ERROR_POPUP_CLOSED) {
         setError("Popup has been closed by the user");
       }

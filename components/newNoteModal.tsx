@@ -2,23 +2,24 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 
-import { NoteModalProps, NoteType } from "@/services/notes/notes-schema";
-import Modal from "./modal";
-
-import { createNote } from "@/services/notes/notes";
+import Modal from "@/components/modal";
 import Spinner from "@/components/spinner";
+
+import { NoteModalProps, NoteType } from "@/models/notes-schema";
+import { createNote } from "@/services/notes";
 
 export default function NoteModal({
   isOpen,
   onClose,
   onNoteAdded,
+  uid,
 }: NoteModalProps) {
   const [newNote, setNewNote] = useState<NoteType>({ title: "", content: "" });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAddNote = async () => {
     setIsLoading(true);
-    const note = await createNote(newNote);
+    const note = await createNote(newNote, uid);
     onNoteAdded(note);
     setIsLoading(false);
     onClose();
@@ -34,7 +35,6 @@ export default function NoteModal({
       <div className="relative">
         <Image
           src="/note-bg.png"
-          objectFit="cover"
           width={800}
           height={800}
           quality={100}
