@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { updateProfile } from "firebase/auth";
+
+import Spinner from "@/components/spinner";
 
 import { SignUpSchema } from "@/helpers/signUpValidator";
+import { createUserDocument } from "@/services/users";
 import { auth, createUserWithEmailAndPassword } from "@/firebase/firebase";
-import Spinner from "@/components/spinner";
 
 export default function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
@@ -19,9 +22,13 @@ export default function SignUp() {
     setIsAuthLoading(true);
     try {
       SignUpSchema.parse(user);
-
-      await createUserWithEmailAndPassword(auth, user.email, user.password);
-
+  
+      const { user: newUser } = await createUserWithEmailAndPassword(auth, user.email, user.password);
+  
+      await updateProfile(newUser, { displayName: user.username });
+  
+      await createUserDocument(newUser.uid, { displayName: user.username, email: user.email });
+  
       router.push("/dashboard");
     } catch (error: unknown) {
       if (error instanceof Error && "errors" in error) {
