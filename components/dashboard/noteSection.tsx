@@ -2,25 +2,36 @@
 
 import Image from "next/image";
 import { GiJusticeStar } from "react-icons/gi";
+import { useEffect, useState } from "react";
+import { ImPlus } from "react-icons/im";
 
-type Note = {
-  title: string;
-  content: string;
-};
+import NoteModal from "../newNoteModal";
+
+import { NoteType } from "@/services/notes/notes-schema";
+import { getNotes } from "@/services/notes/notes";
+
+type NoteClickHandler = (note: NoteType) => void;
 
 export default function NoteSection({
   onNoteClick,
 }: {
-  onNoteClick: (note: Note) => void;
-}): JSX.Element {
-  const notes = [
-    { title: "Movies", content: "I should watch the new Netflix series" },
-    { title: "Books", content: "Finish reading 'The Great Gatsby'" },
-    { title: "Grocery", content: "Buy milk, eggs, and bread" },
-    { title: "Movies", content: "I should watch the new Netflix series" },
-    { title: "Books", content: "Finish reading 'The Great Gatsby'" },
-    { title: "Grocery", content: "Buy milk, eggs, and bread" },
-  ];
+  onNoteClick: NoteClickHandler;
+}) {
+  const [notes, setNotes] = useState<NoteType[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleNoteAdded = (note: any) => {
+    setNotes((prevNotes) => [...prevNotes, note]);
+  };
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const notes = await getNotes();
+      setNotes(notes);
+    };
+
+    fetchNotes();
+  }, []);
 
   const colors = ["bg-red-500", "bg-emerald-500", "bg-rose-400"];
 
@@ -28,9 +39,15 @@ export default function NoteSection({
     <>
       <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
         <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-        <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
-          Your notes
-        </h1>
+        <div className="flex items-center justify-between w-full pl-2 border-2 border-red-900 bg-white">
+          <h1 className="text-xl text-red-900">Your notes</h1>
+          <button
+            className="mr-1 p-1 hover:bg-rose-200 transition-colors duration-600 rounded-full"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <ImPlus className="text-red-700" />
+          </button>
+        </div>
       </div>
       <div className="h-[382px] lg:h-2/3 xl:h-[382px] border-[10px] border-red-900 bg-amber-50 overflow-y-auto">
         <div className="-mb-0.5">
@@ -68,6 +85,13 @@ export default function NoteSection({
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <NoteModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onNoteAdded={handleNoteAdded}
+        />
+      )}
     </>
   );
 }
