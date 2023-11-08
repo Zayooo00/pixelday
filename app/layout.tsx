@@ -23,7 +23,7 @@ export default function RootLayout({
         {" "}
         <div
           className="flex flex-col items-center justify-center h-[calc(100dvh)] bg-center bg-cover"
-          style={{ backgroundImage: "url(splash-background-1.gif)" }}
+          style={{ backgroundImage: "url(splash-background-1.gif)", backgroundRepeat: "repeat" }}
         >
           {children}
         </div>

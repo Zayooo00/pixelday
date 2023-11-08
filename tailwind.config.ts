@@ -7,7 +7,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        "card-bounce": "card-bounce 1s infinite",
+      },
+      screens: {
+        xs: "400px",
+      },
+    },
   },
   plugins: [],
 };
