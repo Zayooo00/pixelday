@@ -13,14 +13,12 @@ import WeekSection from "@/components/dashboard/weekSection";
 import QuestSection from "@/components/dashboard/questSection";
 import Modal from "@/components/modal";
 
-type Note = {
-  title: string;
-  content: string;
-};
+import { NoteType } from "@/services/notes/notes-schema";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [newNote, setNewNote] = useState({ title: "", content: "" });
+  const [selectedNote, setSelectedNote] = useState<NoteType | null>(null);
   const router = useRouter();
 
   const signOut = async () => {
@@ -30,24 +28,24 @@ export default function Dashboard() {
     } catch (error) {}
   };
 
-  const handleNoteClick = (note: Note) => {
+  const handleNoteClick = (note: NoteType) => {
     setSelectedNote(note);
     setIsModalOpen(true);
   };
 
   return (
     <div className="flex flex-col sm:flex-row h-[calc(100dvh)] w-11/12 my-32 gap-4">
-    <div className="order-3 sm:order-1 flex flex-col w-full sm:w-1/4">
-      <NoteSection onNoteClick={handleNoteClick} />
-      <AddQuestSection />
-    </div>
-    <div className="order-1 sm:order-2 flex flex-col w-full mt-4 sm:mt-0 sm:w-2/4">
-      <WelcomeSection />
-      <WeekSection />
-    </div>
-    <div className="order-2 sm:order-3 flex flex-col w-full sm:w-1/4">
-      <QuestSection />
-    </div>
+      <div className="order-3 sm:order-1 flex flex-col w-full sm:w-1/4">
+        <NoteSection onNoteClick={handleNoteClick} />
+        <AddQuestSection />
+      </div>
+      <div className="order-1 sm:order-2 flex flex-col w-full mt-4 sm:mt-0 sm:w-2/4">
+        <WelcomeSection />
+        <WeekSection />
+      </div>
+      <div className="order-2 sm:order-3 flex flex-col w-full sm:w-1/4">
+        <QuestSection />
+      </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <div className="relative">

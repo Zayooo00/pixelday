@@ -7,6 +7,8 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { FaGoogle } from "react-icons/fa";
 
+import Spinner from "@/components/spinner";
+
 import { auth, googleProvider } from "@/firebase/firebase";
 import {
   ERROR_INVALID_EMAIL,
@@ -16,7 +18,6 @@ import {
   ERROR_NETWORK_REQUEST_FAILED,
   ERROR_POPUP_CLOSED,
 } from "@/firebase/firebaseErrorCodes";
-import Spinner from "@/components/spinner";
 
 export default function SignIn() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -61,7 +62,7 @@ export default function SignIn() {
       const { code, message } = error as FirebaseError;
       if (code === ERROR_POPUP_CLOSED) {
         setError("Popup has been closed by the user");
-      } 
+      }
     } finally {
       setIsGoogleAuthLoading(false);
     }
@@ -108,33 +109,37 @@ export default function SignIn() {
           />
         </label>
         <div className="flex items-center justify-center gap-4">
-        <button
-          disabled={!credentials.email || !credentials.password}
-          className={`px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group ${!credentials.email || !credentials.password ? 'cursor-not-allowed' : ''}`}
-          onClick={handleSignIn}
-        >
-          {isAuthLoading ? <Spinner /> : "Sign In"}
-          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
-        </button>
-        <button
-          className="px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group flex items-center"
-          onClick={handleGoogleSignIn}
-        >
-          {isGoogleAuthLoading ? (
-            <Spinner />
-          ) : (
-            <>
-              <FaGoogle
-                alt="Google sign in button"
-                className="text-red-700 mr-1"
-              />{" "}
-              <span>Google</span>
-              <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
-            </>
-          )}
-        </button>
+          <button
+            disabled={!credentials.email || !credentials.password}
+            className={`px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group ${
+              !credentials.email || !credentials.password
+                ? "cursor-not-allowed"
+                : ""
+            }`}
+            onClick={handleSignIn}
+          >
+            {isAuthLoading ? <Spinner /> : "Sign In"}
+            <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
+            <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
+          </button>
+          <button
+            className="px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group flex items-center"
+            onClick={handleGoogleSignIn}
+          >
+            {isGoogleAuthLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                <FaGoogle
+                  alt="Google sign in button"
+                  className="text-red-700 mr-1"
+                />{" "}
+                <span>Google</span>
+                <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
+                <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
+              </>
+            )}
+          </button>
         </div>
         <p className="mt-3 text-xl text-white inline">
           Don&apos;t have an account?{" "}
