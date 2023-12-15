@@ -1,22 +1,23 @@
 import { GiJusticeStar } from "react-icons/gi";
-import { ImPlus } from "react-icons/im";
 
 type Quest = {
   title: string;
-  color: string;
+  type: string;
 };
 
 const quests = {
-  main: [{ title: "Walk 20 KM", color: "red" }],
+  main: [{ title: "Walk 20 KM", type: "main" }],
   daily: [
-    { title: "Groceries", color: "blue" },
-    { title: "Gym", color: "blue" },
+    { title: "Groceries", type: "daily" },
+    { title: "Gym", type: "daily" },
+    { title: "Gaming", type: "daily" },
+    { title: "Gym", type: "daily" },
   ],
 };
 
 const questTypeColors: { [key: string]: string } = {
-  red: "border-red-300 text-stroke-red",
-  blue: "border-blue-300 text-stroke-blue",
+  main: "border-orange-600 text-stroke-orange",
+  daily: "border-sky-600 text-stroke-sky",
 };
 
 export default function QuestSection() {
@@ -31,35 +32,33 @@ export default function QuestSection() {
       <div className="h-full p-2 px-6 border-[10px] border-red-900 bg-amber-50">
         <h1 className="mb-2 text-2xl text-red-900">Main Quest</h1>
         {quests.main.map((quest, index) => (
-          <Quest key={index} title={quest.title} color={quest.color} />
+          <Quest key={index} title={quest.title} type={quest.type} />
         ))}
         <h1 className="mb-2 text-2xl text-red-900 mt-4">Daily Quest</h1>
         {quests.daily.map((quest, index) => (
-          <Quest key={index} title={quest.title} color={quest.color} />
+          <Quest key={index} title={quest.title} type={quest.type} />
         ))}
       </div>
     </>
   );
 }
 
-function Quest({ title, color }: Quest) {
+function Quest({ title, type }: Quest) {
   return (
     <div
-      className={`w-full h-20 my-4 rounded-md border-4 ${questTypeColors[color]} bg-white flex items-center justify-center transform transition-transform hover:animate-card-bounce`}
+      className={`w-full h-20 my-4 rounded-md border-4 ${questTypeColors[type]} bg-white flex items-center justify-center transform transition-transform hover:animate-card-bounce`}
     >
-      <p className={`text-[26px] text-stroke-${color} text-white`}>{title}</p>
+      <p className={`text-[26px] text-white ${questTypeColors[type]}`}>
+        {title}
+      </p>
+      <div className="absolute -top-[64px] -left-[20px] rounded-sm w-20 h-16 border-r-[8px] rotate-45 border-slate-200 transform origin-top-left opacity-75" />
       <div
-        className={`absolute -top-[64px] -left-[20px] rounded-sm w-20 h-16 border-r-[8px] rotate-45 ${questTypeColors[color]} transform origin-top-left`}
+        className={`absolute top-7 left-5 rounded-full border-2 w-4 h-4 ${questTypeColors[type]}`}
       />
       <div
-        className={`absolute top-7 left-5 rounded-full border-2 w-4 h-4 ${questTypeColors[color]}`}
+        className={`absolute top-7 right-5 rounded-full border-2 w-4 h-4 ${questTypeColors[type]}`}
       />
-      <div
-        className={`absolute top-7 right-5 rounded-full border-2 w-4 h-4 ${questTypeColors[color]}`}
-      />
-      <div
-        className={`absolute bottom-[38px] -right-[9px] rounded-sm w-20 h-16 border-r-[8px] rotate-[225deg] ${questTypeColors[color]} transform origin-bottom-right`}
-      />
+      <div className="absolute bottom-[38px] -right-[9px] rounded-sm w-20 h-16 border-r-[8px] rotate-[225deg] border-slate-200 transform origin-bottom-right opacity-75" />
     </div>
   );
 }
