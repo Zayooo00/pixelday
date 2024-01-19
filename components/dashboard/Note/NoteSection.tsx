@@ -5,36 +5,36 @@ import { GiJusticeStar } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { ImPlus } from "react-icons/im";
 
-import NoteModal from "@/components/newNoteModal";
+import NoteModal from "@/components/dashboard/Note/NoteModal";
 
-import { NoteType } from "@/models/notes-schema";
-import { UserInfo } from "@/models/user-schema";
-import { getNotes } from "@/services/notes";
+import { TNoteType } from "@/types/notes";
+import { TUserInfo } from "@/types/users";
+import { getUserNotes } from "@/services/notes";
 
-type NoteClickHandler = (note: NoteType) => void;
+type NoteClickHandler = (note: TNoteType) => void;
 
 export default function NoteSection({
   currentUser,
   onNoteClick,
 }: {
-  currentUser: UserInfo;
+  currentUser: TUserInfo;
   onNoteClick: NoteClickHandler;
 }) {
-  const [notes, setNotes] = useState<NoteType[]>([]);
+  const [notes, setNotes] = useState<TNoteType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleNoteAdded = (note: any) => {
     setNotes((prevNotes) => [...prevNotes, note]);
   };
-  
+
   useEffect(() => {
     const fetchNotes = async () => {
       if (currentUser) {
-        const notes = await getNotes(currentUser.uid);
+        const notes = await getUserNotes(currentUser.uid);
         setNotes(notes);
       }
     };
-  
+
     fetchNotes();
   }, [currentUser]);
 
@@ -71,7 +71,7 @@ export default function NoteSection({
                     className="xl:block hidden"
                     width={48}
                     height={48}
-                    src="/app-icon.png"
+                    src="/assets/images/app-icon.png"
                     alt="Note icon"
                   />
                 </div>

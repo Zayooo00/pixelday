@@ -2,10 +2,10 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 
-import Modal from "@/components/modal";
-import Spinner from "@/components/spinner";
+import Modal from "@/components/Modal";
+import Spinner from "@/components/Spinner";
 
-import { NoteModalProps, NoteType } from "@/models/notes-schema";
+import { TNoteModalProps, TNoteType } from "@/types/notes";
 import { createNote } from "@/services/notes";
 
 export default function NoteModal({
@@ -13,8 +13,8 @@ export default function NoteModal({
   onClose,
   onNoteAdded,
   uid,
-}: NoteModalProps) {
-  const [newNote, setNewNote] = useState<NoteType>({ title: "", content: "" });
+}: TNoteModalProps) {
+  const [newNote, setNewNote] = useState<TNoteType>({ title: "", content: "" });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAddNote = async () => {

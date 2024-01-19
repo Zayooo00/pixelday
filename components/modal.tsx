@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 
-type ModalProps = {
-    isOpen: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-  };
+type TModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
 
-  export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children }: TModalProps) {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
-        if (event.keyCode === 27) onClose();
-      };
+      if (event.keyCode === 27) onClose();
+    };
     window.addEventListener("keydown", handleEsc);
 
     return () => {
