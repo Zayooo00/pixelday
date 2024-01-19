@@ -2,26 +2,28 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { User } from 'firebase/auth';
 import { AiOutlineClose } from "react-icons/ai";
 import { useEffect } from "react";
 import Image from "next/image";
 
-import NoteSection from "@/components/dashboard/noteSection";
-import AddQuestSection from "@/components/dashboard/addQuestSection";
-import WelcomeSection from "@/components/dashboard/welcomeSection";
-import WeekSection from "@/components/dashboard/weekSection";
-import QuestSection from "@/components/dashboard/questSection";
-import Modal from "@/components/modal";
+import NoteSection from "@/components/dashboard/Note/NoteSection";
+import AddQuestSection from "@/components/dashboard/AddQuest/AddQuestSection";
+import WelcomeSection from "@/components/dashboard/Welcome/WelcomeSection";
+import WeekSection from "@/components/dashboard/Week/WeekSection";
+import QuestSection from "@/components/dashboard/Quest/QuestSection";
+import Modal from "@/components/Modal";
 
-import { NoteType } from "@/models/notes-schema";
-import { UserInfo } from "@/models/user-schema";
+import { TNoteType } from "@/types/notes";
+import { TUserInfo } from "@/types/users";
 import { auth } from "@/firebase/firebase";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNote, setSelectedNote] = useState<NoteType | null>(null);
-  const [currentUser, setCurrentUser] = useState<UserInfo>({ currentUser: null, uid: '' });
+  const [selectedNote, setSelectedNote] = useState<TNoteType | null>(null);
+  const [currentUser, setCurrentUser] = useState<TUserInfo>({
+    currentUser: null,
+    uid: "",
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -36,15 +38,15 @@ export default function Dashboard() {
     return () => unsubscribe();
   }, [router]);
 
-  const handleNoteClick = (note: NoteType) => {
+  const handleNoteClick = (note: TNoteType) => {
     setSelectedNote(note);
     setIsModalOpen(true);
   };
 
   return (
-    <div className="flex flex-col sm:flex-row h-[calc(100dvh)] w-11/12 my-32 gap-4">
+    <div className="flex flex-col sm:flex-row sm:h-[calc(100dvh)] w-11/12 my-32 gap-4">
       <div className="order-3 sm:order-1 flex flex-col w-full sm:w-1/4">
-        <NoteSection onNoteClick={handleNoteClick} currentUser={currentUser}/>
+        <NoteSection onNoteClick={handleNoteClick} currentUser={currentUser} />
         <AddQuestSection />
       </div>
       <div className="order-1 sm:order-2 flex flex-col w-full mt-4 sm:mt-0 sm:w-2/4">

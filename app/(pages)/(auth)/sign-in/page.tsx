@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { FaGoogle } from "react-icons/fa";
 
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/Spinner";
 
 import { auth, googleProvider } from "@/firebase/firebase";
 import {
@@ -82,7 +82,10 @@ export default function SignIn() {
           Pixel Day
         </h1>
       </Link>
-      <form onSubmit={handleSignIn} className="flex flex-col items-center mt-16">
+      <form
+        onSubmit={handleSignIn}
+        className="flex flex-col items-center mt-16"
+      >
         {error && (
           <p className="text-xl rounded-sm -mt-10 mb-3 px-2 bg-white text-red-500">
             {error}

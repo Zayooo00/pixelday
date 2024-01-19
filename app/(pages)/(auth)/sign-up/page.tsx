@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
 
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/Spinner";
 
 import { SignUpSchema } from "@/helpers/signUpValidator";
 import { createUserDocument } from "@/services/users";
@@ -23,24 +23,24 @@ export default function SignUp() {
     setIsAuthLoading(true);
     try {
       SignUpSchema.parse(user);
-  
+
       const { user: newUser } = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
-  
+
       await updateProfile(newUser, { displayName: user.username });
-  
+
       await createUserDocument(newUser.uid, {
         displayName: user.username,
         email: user.email,
       });
-  
+
       router.push("/dashboard");
     } catch (error) {
       const { code, message } = error as { code?: string; message: string };
-  
+
       if (code === ERROR_EMAIL_ALREADY_IN_USE) {
         setError("Email is already in use.");
       } else if (message) {
