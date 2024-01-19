@@ -1,12 +1,12 @@
-export type NoteType = {
+export type TNoteType = {
   uid?: string;
   title?: string;
   content?: string;
 };
 
-export type NoteModalProps = {
+export type TNoteModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onNoteAdded: (note: NoteType) => void;
+  onNoteAdded: (note: TNoteType) => void;
   uid: string;
 };
