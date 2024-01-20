@@ -4,7 +4,7 @@ import { GiJusticeStar } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
 
-import DateDisplay from "@/components/DateDisplay";
+import DateDisplay from "@/components/dateDisplay";
 
 import { auth } from "@/firebase/firebase";
 import { TUserInfo } from "@/types/users";
