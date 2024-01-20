@@ -2,8 +2,8 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 
-import Modal from "@/components/Modal";
-import Spinner from "@/components/Spinner";
+import Modal from "@/components/modal";
+import Spinner from "@/components/spinner";
 
 import { TNoteModalProps, TNoteType } from "@/types/notes";
 import { createNote } from "@/services/notes";

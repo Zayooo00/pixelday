@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/spinner";
 
 import { SignUpSchema } from "@/helpers/signUpValidator";
 import { createUserDocument } from "@/services/users";

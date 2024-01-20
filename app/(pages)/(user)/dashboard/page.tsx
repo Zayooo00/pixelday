@@ -11,7 +11,7 @@ import AddQuestSection from "@/components/dashboard/AddQuest/AddQuestSection";
 import WelcomeSection from "@/components/dashboard/Welcome/WelcomeSection";
 import WeekSection from "@/components/dashboard/Week/WeekSection";
 import QuestSection from "@/components/dashboard/Quest/QuestSection";
-import Modal from "@/components/Modal";
+import Modal from "@/components/modal";
 
 import { TNoteType } from "@/types/notes";
 import { TUserInfo } from "@/types/users";
