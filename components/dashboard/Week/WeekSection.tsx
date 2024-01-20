@@ -13,13 +13,13 @@ export default function WeekSection() {
 
   return (
     <>
-      <div className="mt-4 flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
+      <div className="mt-[44px] md:mt-[51px] lg:-mt-[68px] flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
         <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
         <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
           Plan your week
         </h1>
       </div>
-      <div className="h-full sm:h-5/6 p-4 border-[10px] border-red-900 bg-amber-50 grid grid-cols-7 gap-4">
+      <div className="p-4 lg:h-[105.75%] border-[10px] border-red-900 bg-amber-50 grid grid-cols-7 gap-4">
         {Object.entries(weekDays).map(([day, colorClass], index) => (
           <div key={index} className="flex flex-col items-center">
             <div

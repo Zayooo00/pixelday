@@ -5,7 +5,7 @@ import { GiJusticeStar } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { ImPlus } from "react-icons/im";
 
-import NoteModal from "@/components/dashboard/Note/NoteModal";
+import NoteModal from "@/components/dashboard/Note/CreateNoteModal";
 
 import { TNoteType } from "@/types/notes";
 import { TUserInfo } from "@/types/users";
@@ -54,7 +54,7 @@ export default function NoteSection({
           </button>
         </div>
       </div>
-      <div className="h-[382px] lg:h-2/3 xl:h-[382px] border-[10px] border-red-900 bg-amber-50 overflow-y-auto">
+      <div className="h-[382px] md:h-full lg:h-[382px] border-[10px] border-red-900 bg-amber-50 overflow-y-auto">
         <div className="-mb-0.5">
           <div className="w-full h-full pt-2 pl-2 pr-[13px] xl:block xl:flex-col lg:grid lg:grid-cols-2 gap-4">
             {notes.map((note, index) => (

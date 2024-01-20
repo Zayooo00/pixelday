@@ -42,7 +42,7 @@ export default function WelcomeSection({
           </button>
         </h1>
       </div>
-      <div className="h-2/6 sm:h-1/6 p-4 border-[10px] border-red-900 bg-amber-50">
+      <div className="h-24 p-4 border-[10px] border-red-900 bg-amber-50">
         <DateDisplay />
       </div>
     </>

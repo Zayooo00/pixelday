@@ -8,7 +8,7 @@ import Spinner from "@/components/Spinner";
 import { TNoteModalProps, TNoteType } from "@/types/notes";
 import { createNote } from "@/services/notes";
 
-export default function NoteModal({
+export default function NewNoteModal({
   isOpen,
   onClose,
   onNoteAdded,

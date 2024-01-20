@@ -9,6 +9,8 @@ const quests = {
     { title: "Gym", type: "daily" },
     { title: "Gaming", type: "daily" },
     { title: "Gym", type: "daily" },
+    { title: "Gaming", type: "daily" },
+    { title: "Gym", type: "daily" },
   ],
 };
 
@@ -21,7 +23,7 @@ export default function QuestSection() {
           Quests
         </h1>
       </div>
-      <div className="h-full p-2 px-6 border-[10px] border-red-900 bg-amber-50">
+      <div className="h-full lg:h-[656px] p-2 px-6 border-[10px] border-red-900 bg-amber-50 overflow-x-hidden overflow-y-auto">
         <h1 className="mb-2 text-2xl text-red-900">Main Quest</h1>
         {quests.main.map((quest, index) => (
           <Quest key={index} title={quest.title} type={quest.type} />
