@@ -4,7 +4,7 @@ import { GiJusticeStar } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
 
-import DateDisplay from "@/components/dateDisplay";
+import DateDisplay from "@/components/common/dateDisplay";
 
 import { auth } from "@/firebase/firebase";
 import { TUserInfo } from "@/types/users";
@@ -37,6 +37,7 @@ export default function WelcomeSection({
           <button
             className="mr-1 p-0.5 hover:bg-rose-200 transition-colors duration-600 rounded-full"
             onClick={handleLogout}
+            title="Logout"
           >
             <BiLogOut className="text-red-700" />
           </button>
