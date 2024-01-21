@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { FaGoogle } from "react-icons/fa";
 
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/common/spinner";
 
 import { auth, googleProvider } from "@/firebase/firebase";
 import {
