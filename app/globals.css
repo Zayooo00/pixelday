@@ -53,6 +53,13 @@ body {
     1px 1px 0 #c2410c;
 }
 
+@media (max-width: 638px) {
+  img {
+    max-width: none;
+    height: auto;
+  }
+}
+
 @keyframes card-bounce {
   0%,
   100% {
@@ -64,3 +71,4 @@ body {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
