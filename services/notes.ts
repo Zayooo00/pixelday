@@ -27,7 +27,7 @@ export const getUserNotes = async (uid: string) => {
   const q = query(
     notesCollection,
     where("uid", "==", uid),
-    orderBy("timestamp", "desc")
+    orderBy("timestamp", "desc"),
   );
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() }));

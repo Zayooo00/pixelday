@@ -28,28 +28,46 @@ body {
 }
 
 .title-text-stroke {
-  text-shadow: -8px -8px 0 #99201c, 8px -8px 0 #99201c, -8px 8px 0 #99201c,
-    8px 8px 0 #99201c, 0 -8px 0 #99201c, -8px 0 0 #99201c, 0 8px 0 #99201c,
+  text-shadow:
+    -8px -8px 0 #99201c,
+    8px -8px 0 #99201c,
+    -8px 8px 0 #99201c,
+    8px 8px 0 #99201c,
+    0 -8px 0 #99201c,
+    -8px 0 0 #99201c,
+    0 8px 0 #99201c,
     8px 0 0 #99201c;
 }
 
 .text-stroke-red {
-  text-shadow: -1px -1px 0 #881337, 1px -1px 0 #881337, -1px 1px 0 #881337,
+  text-shadow:
+    -1px -1px 0 #881337,
+    1px -1px 0 #881337,
+    -1px 1px 0 #881337,
     1px 1px 0 #881337;
 }
 
 .text-stroke-rose {
-  text-shadow: -1px -1px 0 #7f1d1d, 1px -1px 0 #7f1d1d, -1px 1px 0 #7f1d1d,
+  text-shadow:
+    -1px -1px 0 #7f1d1d,
+    1px -1px 0 #7f1d1d,
+    -1px 1px 0 #7f1d1d,
     1px 1px 0 #7f1d1d;
 }
 
 .text-stroke-sky {
-  text-shadow: -1px -1px 0 #0369a1, 1px -1px 0 #0369a1, -1px 1px 0 #0369a1,
+  text-shadow:
+    -1px -1px 0 #0369a1,
+    1px -1px 0 #0369a1,
+    -1px 1px 0 #0369a1,
     1px 1px 0 #0369a1;
 }
 
 .text-stroke-orange {
-  text-shadow: -1px -1px 0 #c2410c, 1px -1px 0 #c2410c, -1px 1px 0 #c2410c,
+  text-shadow:
+    -1px -1px 0 #c2410c,
+    1px -1px 0 #c2410c,
+    -1px 1px 0 #c2410c,
     1px 1px 0 #c2410c;
 }
 
@@ -71,4 +89,3 @@ body {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
-

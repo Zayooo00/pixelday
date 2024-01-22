@@ -30,7 +30,7 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className={`flex fixed top-3 left-3 z-[100] text-white p-4 m-4 rounded ${
+      className={`fixed left-3 top-3 z-[100] m-4 flex rounded p-4 text-white ${
         type === "success" ? "bg-green-500" : "bg-red-500"
       }`}
     >

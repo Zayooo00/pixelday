@@ -10,7 +10,7 @@ import Spinner from "@/components/common/spinner";
 import { SignUpSchema } from "@/helpers/signUpValidator";
 import { createUserDocument } from "@/services/users";
 import { auth, createUserWithEmailAndPassword } from "@/firebase/firebase";
-import { ERROR_EMAIL_ALREADY_IN_USE } from "@/firebase/firebaseErrorCodes";
+import { ERROR_EMAIL_ALREADY_IN_USE } from "@/constants/firebaseErrorCodes";
 
 export default function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
@@ -27,7 +27,7 @@ export default function SignUp() {
       const { user: newUser } = await createUserWithEmailAndPassword(
         auth,
         user.email,
-        user.password
+        user.password,
       );
 
       await updateProfile(newUser, { displayName: user.username });
@@ -55,35 +55,35 @@ export default function SignUp() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
+    <main className="flex flex-1 flex-col items-center justify-center px-20 text-center">
       <Link href={"/"} className="-mt-16 sm:-mt-52">
-        <h1 className="text-6xl sm:text-8xl font-bold text-white title-text-stroke">
+        <h1 className="title-text-stroke text-6xl font-bold text-white sm:text-8xl">
           Pixel Day
         </h1>
       </Link>
       <form
         onSubmit={handleSignUp}
-        className="flex flex-col items-center mt-16"
+        className="mt-16 flex flex-col items-center"
       >
         {error && (
-          <p className="text-xl rounded-sm -mt-10 mb-3 px-2 bg-white text-red-500">
+          <p className="-mt-10 mb-3 rounded-sm bg-white px-2 text-xl text-red-500">
             {error}
           </p>
         )}
-        <label className="flex items-center mb-4">
+        <label className="mb-4 flex items-center">
           <span className="w-32 text-left text-2xl text-white">Email:</span>
           <input
-            className="px-2 py-1 w-36 sm:w-48 text-xl border-solid border-2 border-red-600 focus:border-red-700 focus:outline-none"
+            className="w-36 border-2 border-solid border-red-600 px-2 py-1 text-xl focus:border-red-700 focus:outline-none sm:w-48"
             type="text"
             name="name"
             placeholder="Enter email"
             onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
         </label>
-        <label className="flex items-center mb-4">
+        <label className="mb-4 flex items-center">
           <span className="w-32 text-left text-2xl text-white">Username:</span>
           <input
-            className="px-2 py-1 w-36 sm:w-48 text-xl border-solid border-2 border-red-600 focus:border-red-700 focus:outline-none"
+            className="w-36 border-2 border-solid border-red-600 px-2 py-1 text-xl focus:border-red-700 focus:outline-none sm:w-48"
             type="text"
             name="name"
             placeholder="Enter username"
@@ -94,20 +94,20 @@ export default function SignUp() {
           <span className="w-32 text-left text-2xl text-white">Password:</span>
           <input
             type="password"
-            className="px-2 py-1 w-36 sm:w-48 text-xl border-solid border-2 border-red-600 focus:border-red-700 focus:outline-none"
+            className="w-36 border-2 border-solid border-red-600 px-2 py-1 text-xl focus:border-red-700 focus:outline-none sm:w-48"
             placeholder="********"
             onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
         </label>
         <button
-          className="px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group"
+          className="group relative mt-6 transform rounded-md border-4 border-solid border-red-700 bg-white px-4 py-1 text-xl text-red-700 transition-transform duration-500 hover:scale-110"
           onClick={handleSignUp}
         >
           {isAuthLoading ? <Spinner /> : "Sign Up"}
-          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
+          <span className="absolute bottom-[-0.5rem] left-2 h-2 w-full scale-y-0 transform rounded-l-sm bg-red-700 transition-transform duration-500 group-hover:scale-y-100" />
+          <span className="absolute right-[-0.5rem] top-2 h-full w-2 scale-x-0 transform rounded-r-sm bg-red-700 transition-transform duration-500 group-hover:scale-x-100" />
         </button>
-        <p className="mt-3 text-xl text-white inline">
+        <p className="mt-3 inline text-xl text-white">
           Already have an acccount?{" "}
           <Link href="/sign-in">
             <strong>Sign in</strong>

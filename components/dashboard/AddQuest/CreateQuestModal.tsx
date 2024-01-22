@@ -38,7 +38,7 @@ export default function CreateQuestModal({
       const createdQuest = await createQuest(
         { ...validatedQuest, questId: "" },
         uid,
-        questType
+        questType,
       );
       setIsLoading(false);
 
@@ -66,7 +66,7 @@ export default function CreateQuestModal({
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <form
-          className="-mt-14 relative flex items-center justify-center"
+          className="relative -mt-14 flex items-center justify-center"
           onSubmit={handleCreateQuest}
         >
           <Image
@@ -76,8 +76,8 @@ export default function CreateQuestModal({
             quality={100}
             alt="Quest background"
           />
-          <div className="absolute inset-0 flex flex-col justify-center items-center">
-            <div className="flex flex-col items-center w-full mt-12 sm:mt-24 md:mt-12">
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="mt-12 flex w-full flex-col items-center sm:mt-24 md:mt-12">
               <Image
                 src="/assets/images/quest.png"
                 width={150}
@@ -85,8 +85,8 @@ export default function CreateQuestModal({
                 quality={100}
                 alt="Quest icon"
               />
-              <h1 className="text-4xl text-black mt-2">Create a new quest</h1>
-              <div className=" mt-2 w-[60vw] sm:w-[35vw] md:w-[30vw] lg:w-[320px] text-left">
+              <h1 className="mt-2 text-4xl text-black">Create a new quest</h1>
+              <div className=" mt-2 w-[60vw] text-left sm:w-[35vw] md:w-[30vw] lg:w-[320px]">
                 {errors.map((error, index) => (
                   <Error key={index} message={error} />
                 ))}
@@ -94,7 +94,7 @@ export default function CreateQuestModal({
               <div className="w-[60vw] sm:w-[35vw] md:w-[30vw] lg:w-[320px]">
                 <input
                   placeholder="Quest title goes here"
-                  className="w-full border-2 text-xl mt-4 bg-opacity-50 bg-white border-red-500 focus:border-red-900 focus:outline-none p-2 mb-4 rounded-md transition-colors duration-500"
+                  className="mb-4 mt-4 w-full rounded-md border-2 border-red-500 bg-white bg-opacity-50 p-2 text-xl transition-colors duration-500 focus:border-red-900 focus:outline-none"
                   value={newQuest.title}
                   onChange={(e) =>
                     setNewQuest({ ...newQuest, title: e.target.value })
@@ -104,7 +104,7 @@ export default function CreateQuestModal({
             </div>
             <button
               disabled={isLoading}
-              className={`px-4 py-1 text-xl mb-8 w-42 p-2 text-amber-50 text-stroke-red transform transition-transform hover:scale-105 duration-300 border-t-4 border-x-4 border-b-8 border-red-900 bg-red-500 ${
+              className={`w-42 text-stroke-red mb-8 transform border-x-4 border-b-8 border-t-4 border-red-900 bg-red-500 p-2 px-4 py-1 text-xl text-amber-50 transition-transform duration-300 hover:scale-105 ${
                 isLoading ? "cursor-not-allowed" : ""
               }`}
               type="submit"

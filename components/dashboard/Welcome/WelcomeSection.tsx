@@ -25,9 +25,9 @@ export default function WelcomeSection({
 
   return (
     <>
-      <div className="flex items-center justify-between border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-        <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-        <h1 className="flex justify-between items-center text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
+      <div className="flex items-center justify-between border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2">
+        <GiJusticeStar className="mr-2 border-2 border-red-900 bg-white text-3xl text-red-900" />
+        <h1 className="flex w-full items-center justify-between border-2 border-red-900 bg-white pl-2 text-xl text-red-900">
           <span>
             Welcome again,{" "}
             <strong>
@@ -35,7 +35,7 @@ export default function WelcomeSection({
             </strong>
           </span>
           <button
-            className="mr-1 p-0.5 hover:bg-rose-200 transition-colors duration-600 rounded-full"
+            className="duration-600 mr-1 rounded-full p-0.5 transition-colors hover:bg-rose-200"
             onClick={handleLogout}
             title="Logout"
           >
@@ -43,7 +43,7 @@ export default function WelcomeSection({
           </button>
         </h1>
       </div>
-      <div className="h-24 p-4 border-[10px] border-red-900 bg-amber-50">
+      <div className="h-24 border-[10px] border-red-900 bg-amber-50 p-4">
         <DateDisplay />
       </div>
     </>

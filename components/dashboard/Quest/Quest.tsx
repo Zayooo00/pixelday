@@ -6,21 +6,21 @@ export default function Quest({ title, type, status }: TQuestProps) {
 
   return (
     <div
-      className={`cursor-pointer w-full h-20 my-4 rounded-md border-4 ${color} bg-white flex items-center justify-center transform transition-transform hover:animate-card-bounce`}
+      className={`my-4 h-20 w-full cursor-pointer rounded-md border-4 ${color} flex transform items-center justify-center bg-white transition-transform hover:animate-card-bounce`}
     >
       <p
-        className={`mx-10 text-center text-xl sm:text-[26px] lg:text-[1.4dvw] text-white ${color}`}
+        className={`mx-10 text-center text-xl text-white sm:text-[26px] lg:text-[1.4dvw] ${color}`}
       >
         {title}
       </p>
-      <div className="absolute -top-[64px] -left-[20px] rounded-sm w-20 h-16 border-r-[8px] rotate-45 border-slate-200 transform origin-top-left opacity-75" />
+      <div className="absolute -left-[20px] -top-[64px] h-16 w-20 origin-top-left rotate-45 transform rounded-sm border-r-[8px] border-slate-200 opacity-75" />
       <div
-        className={`absolute top-7 left-5 rounded-full border-2 w-4 h-4 ${color}`}
+        className={`absolute left-5 top-7 h-4 w-4 rounded-full border-2 ${color}`}
       />
       <div
-        className={`absolute top-7 right-5 rounded-full border-2 w-4 h-4 ${color}`}
+        className={`absolute right-5 top-7 h-4 w-4 rounded-full border-2 ${color}`}
       />
-      <div className="absolute bottom-[38px] -right-[9px] rounded-sm w-20 h-16 border-r-[8px] rotate-[225deg] border-slate-200 transform origin-bottom-right opacity-75" />
+      <div className="absolute -right-[9px] bottom-[38px] h-16 w-20 origin-bottom-right rotate-[225deg] transform rounded-sm border-r-[8px] border-slate-200 opacity-75" />
     </div>
   );
 }

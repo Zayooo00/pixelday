@@ -38,26 +38,26 @@ export default function Dashboard() {
 
   return (
     <QuestProvider>
-      <div className="gap-y-4 md:gap-x-4 w-11/12 my-4 lg:my-20 grid grid-cols-1 grid-rows-10 md:grid-cols-2 md:grid-rows-10 lg:grid-cols-4 lg:grid-rows-3">
+      <div className="grid-rows-10 md:grid-rows-10 my-4 grid w-11/12 grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-4 lg:my-20 lg:grid-cols-4 lg:grid-rows-3">
         <Toast
           message={toast.message}
           type={toast.type}
           isVisible={toast.isVisible}
           hideToast={() => setToast((prev) => ({ ...prev, isVisible: false }))}
         />
-        <div className="col-span-1 row-span-1 row-start-1 col-start-1 md:col-start-1 lg:col-start-2 md:col-span-2 md:-mr-4 lg:-mr-0">
+        <div className="col-span-1 col-start-1 row-span-1 row-start-1 md:col-span-2 md:col-start-1 md:-mr-4 lg:col-start-2 lg:-mr-0">
           <WelcomeSection currentUser={currentUser} />
         </div>
-        <div className="col-span-1 row-span-2 row-start-2 col-start-1 md:row-start-2 lg:row-start-1">
+        <div className="col-span-1 col-start-1 row-span-2 row-start-2 md:row-start-2 lg:row-start-1">
           <NoteSection currentUser={currentUser} />
         </div>
-        <div className="col-span-2 row-span-2 row-start-9 col-start-1 md:col-start-1 md:row-start-6 lg:col-start-2 lg:row-start-2 md:-mr-4 lg:-mr-0">
+        <div className="row-start-9 col-span-2 col-start-1 row-span-2 md:col-start-1 md:row-start-6 md:-mr-4 lg:col-start-2 lg:row-start-2 lg:-mr-0">
           <WeekSection />
         </div>
-        <div className="col-span-1 row-span-2 row-start-4 col-start-1 md:col-start-2 md:row-start-2 md:col-span-2 lg:col-start-4 lg:row-start-1 lg:row-span-4">
+        <div className="col-span-1 col-start-1 row-span-2 row-start-4 md:col-span-2 md:col-start-2 md:row-start-2 lg:col-start-4 lg:row-span-4 lg:row-start-1">
           <QuestSection currentUser={currentUser} />
         </div>
-        <div className="col-span-1 row-span-2 row-start-7 col-start-1 md:col-span-2 md:row-start-4 lg:col-start-1 lg:col-span-1 lg:row-start-3 md:-mr-4 lg:-mr-0">
+        <div className="col-span-1 col-start-1 row-span-2 row-start-7 md:col-span-2 md:row-start-4 md:-mr-4 lg:col-span-1 lg:col-start-1 lg:row-start-3 lg:-mr-0">
           <AddQuestSection currentUser={currentUser} />
         </div>
       </div>
