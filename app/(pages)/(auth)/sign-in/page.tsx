@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { FaGoogle } from "react-icons/fa";
 
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/common/spinner";
 
 import { auth, googleProvider } from "@/firebase/firebase";
 import {
@@ -82,7 +82,10 @@ export default function SignIn() {
           Pixel Day
         </h1>
       </Link>
-      <div className="flex flex-col items-center mt-16">
+      <form
+        onSubmit={handleSignIn}
+        className="flex flex-col items-center mt-16"
+      >
         {error && (
           <p className="text-xl rounded-sm -mt-10 mb-3 px-2 bg-white text-red-500">
             {error}
@@ -110,19 +113,20 @@ export default function SignIn() {
         </label>
         <div className="flex items-center justify-center gap-4">
           <button
+            type="submit"
             disabled={!credentials.email || !credentials.password}
             className={`px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group ${
               !credentials.email || !credentials.password
                 ? "cursor-not-allowed"
                 : ""
             }`}
-            onClick={handleSignIn}
           >
             {isAuthLoading ? <Spinner /> : "Sign In"}
             <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
             <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
           </button>
           <button
+            type="button"
             className="px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group flex items-center"
             onClick={handleGoogleSignIn}
           >
@@ -147,7 +151,7 @@ export default function SignIn() {
             <strong>Sign up</strong>
           </Link>
         </p>
-      </div>
+      </form>
     </main>
   );
 }

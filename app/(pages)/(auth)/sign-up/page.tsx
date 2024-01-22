@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
 
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/common/spinner";
 
 import { SignUpSchema } from "@/helpers/signUpValidator";
 import { createUserDocument } from "@/services/users";
 import { auth, createUserWithEmailAndPassword } from "@/firebase/firebase";
+import { ERROR_EMAIL_ALREADY_IN_USE } from "@/firebase/firebaseErrorCodes";
 
 export default function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
@@ -22,19 +23,31 @@ export default function SignUp() {
     setIsAuthLoading(true);
     try {
       SignUpSchema.parse(user);
-  
-      const { user: newUser } = await createUserWithEmailAndPassword(auth, user.email, user.password);
-  
+
+      const { user: newUser } = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+
       await updateProfile(newUser, { displayName: user.username });
-  
-      await createUserDocument(newUser.uid, { displayName: user.username, email: user.email });
-  
+
+      await createUserDocument(newUser.uid, {
+        displayName: user.username,
+        email: user.email,
+      });
+
       router.push("/dashboard");
-    } catch (error: unknown) {
-      if (error instanceof Error && "errors" in error) {
-        setError((error as any).errors[0].message);
-      } else if (error instanceof Error) {
-        setError(error.message);
+    } catch (error) {
+      const { code, message } = error as { code?: string; message: string };
+
+      if (code === ERROR_EMAIL_ALREADY_IN_USE) {
+        setError("Email is already in use.");
+      } else if (message) {
+        const parsedError = JSON.parse(message);
+        setError(parsedError[0].message);
+      } else {
+        setError(message);
       }
     } finally {
       setIsAuthLoading(false);
@@ -48,7 +61,10 @@ export default function SignUp() {
           Pixel Day
         </h1>
       </Link>
-      <div className="flex flex-col items-center mt-16">
+      <form
+        onSubmit={handleSignUp}
+        className="flex flex-col items-center mt-16"
+      >
         {error && (
           <p className="text-xl rounded-sm -mt-10 mb-3 px-2 bg-white text-red-500">
             {error}
@@ -87,9 +103,9 @@ export default function SignUp() {
           className="px-4 py-1 mt-6 text-xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group"
           onClick={handleSignUp}
         >
-          {isAuthLoading ? <Spinner/> : "Sign Up"}
-          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm"/>
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm"/>
+          {isAuthLoading ? <Spinner /> : "Sign Up"}
+          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm" />
+          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm" />
         </button>
         <p className="mt-3 text-xl text-white inline">
           Already have an acccount?{" "}
@@ -97,7 +113,7 @@ export default function SignUp() {
             <strong>Sign in</strong>
           </Link>
         </p>
-      </div>
+      </form>
     </main>
   );
 }

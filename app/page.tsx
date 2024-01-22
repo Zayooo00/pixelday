@@ -3,7 +3,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-      <h1 className="text-9xl font-bold text-white title-text-stroke">Pixel Day</h1>
+      <h1 className="text-9xl font-bold text-white title-text-stroke">
+        Pixel Day
+      </h1>
       <div className="flex mt-6">
         <Link
           href="/sign-in"

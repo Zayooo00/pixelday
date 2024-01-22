@@ -43,9 +43,21 @@ body {
     1px 1px 0 #7f1d1d;
 }
 
-.text-stroke-blue {
-  text-shadow: -1px -1px 0 #38bdf8, 1px -1px 0 #38bdf8, -1px 1px 0 #38bdf8,
-    1px 1px 0 #38bdf8;
+.text-stroke-sky {
+  text-shadow: -1px -1px 0 #0369a1, 1px -1px 0 #0369a1, -1px 1px 0 #0369a1,
+    1px 1px 0 #0369a1;
+}
+
+.text-stroke-orange {
+  text-shadow: -1px -1px 0 #c2410c, 1px -1px 0 #c2410c, -1px 1px 0 #c2410c,
+    1px 1px 0 #c2410c;
+}
+
+@media (max-width: 638px) {
+  img {
+    max-width: none;
+    height: auto;
+  }
 }
 
 @keyframes card-bounce {
