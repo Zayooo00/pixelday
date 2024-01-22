@@ -1,4 +1,4 @@
-export type QuestStatus = 'active' | 'complete';
+export type QuestStatus = "active" | "complete";
 
 export type TQuest = {
   questId: string;
@@ -23,7 +23,7 @@ export type TPreviewQuestModalProps = {
   isOpen: boolean;
   onClose: () => void;
   selectedQuest: TQuest | null;
-  onQuestUpdate: (updatedQuest: TQuest) => void
+  onQuestUpdate: (updatedQuest: TQuest) => void;
 };
 
 export type TCreateQuestModalProps = {

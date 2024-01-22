@@ -6,7 +6,7 @@ export default function Quest({ title, type, status }: TQuestProps) {
 
   return (
     <div
-      className={`cursor-pointer w-full h-20 my-4 rounded-md border-4 ${color} bg-white flex items-center justify-center transform transition-transform hover:animate-card-bounce`}
+      className={`cursor-pointer w-full h-20 my-4 rounded-md border-t-2 border-l-2 border-r-4 border-b-4 ${color} bg-white flex items-center justify-center transform transition-transform hover:animate-card-bounce`}
     >
       <p
         className={`mx-10 text-center text-xl sm:text-[26px] lg:text-[1.4dvw] text-white ${color}`}

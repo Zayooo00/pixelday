@@ -19,12 +19,12 @@ export default function PreviewNoteModal({
           quality={100}
           alt="Note background"
         />
-        <div className="absolute inset-0 flex flex-col justify-start items-center text-center mt-64 sm:mt-48 md:mt-64 p-4">
-          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl leading-8 text-black mb-4">
+        <div className="absolute inset-0 mt-64 flex flex-col items-center justify-start p-4 text-center sm:mt-48 md:mt-64">
+          <h1 className="mb-4 text-5xl leading-8 text-black sm:text-4xl md:text-5xl lg:text-6xl">
             {selectedNote?.title}
           </h1>
-          <hr className="xs:mt-2 w-[300px] sm:w-[200px] md:w-[300px] border-t-2 border-red-700 mb-4" />
-          <p className="w-44 xs:w-64 text-md xs:text-xl break-words text-black">
+          <hr className="mb-4 w-[300px] border-t-2 border-red-700 xs:mt-2 sm:w-[200px] md:w-[300px]" />
+          <p className="text-md w-44 break-words text-black xs:w-64 xs:text-xl">
             {selectedNote?.content}
           </p>
         </div>

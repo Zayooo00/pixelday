@@ -2,26 +2,26 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-      <h1 className="text-9xl font-bold text-white title-text-stroke">
+    <main className="flex flex-1 flex-col items-center justify-center px-20 text-center">
+      <h1 className="title-text-stroke text-9xl font-bold text-white">
         Pixel Day
       </h1>
-      <div className="flex mt-6">
+      <div className="mt-6 flex">
         <Link
           href="/sign-in"
-          className="px-2 sm:px-10 py-3 m-4 text-2xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group"
+          className="group relative m-4 transform rounded-md border-4 border-solid border-red-700 bg-white px-2 py-3 text-2xl text-red-700 transition-transform duration-500 hover:scale-110 sm:px-10"
         >
           Sign In
-          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm"></span>
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm"></span>
+          <span className="absolute bottom-[-0.5rem] left-2 h-2 w-full scale-y-0 transform rounded-l-sm bg-red-700 transition-transform duration-500 group-hover:scale-y-100"></span>
+          <span className="absolute right-[-0.5rem] top-2 h-full w-2 scale-x-0 transform rounded-r-sm bg-red-700 transition-transform duration-500 group-hover:scale-x-100"></span>
         </Link>
         <Link
           href="/sign-up"
-          className="px-2 sm:px-10 py-3 m-4 text-2xl text-red-700 bg-white rounded-md border-solid border-4 border-red-700 transform transition-transform duration-500 hover:scale-110 relative group"
+          className="group relative m-4 transform rounded-md border-4 border-solid border-red-700 bg-white px-2 py-3 text-2xl text-red-700 transition-transform duration-500 hover:scale-110 sm:px-10"
         >
           Sign Up
-          <span className="absolute bottom-[-0.5rem] left-2 w-full h-2 transform scale-y-0 bg-red-700 transition-transform duration-500 group-hover:scale-y-100 rounded-l-sm"></span>
-          <span className="absolute top-2 right-[-0.5rem] h-full w-2 transform scale-x-0 bg-red-700 transition-transform duration-500 group-hover:scale-x-100 rounded-r-sm"></span>
+          <span className="absolute bottom-[-0.5rem] left-2 h-2 w-full scale-y-0 transform rounded-l-sm bg-red-700 transition-transform duration-500 group-hover:scale-y-100"></span>
+          <span className="absolute right-[-0.5rem] top-2 h-full w-2 scale-x-0 transform rounded-r-sm bg-red-700 transition-transform duration-500 group-hover:scale-x-100"></span>
         </Link>
       </div>
     </main>
