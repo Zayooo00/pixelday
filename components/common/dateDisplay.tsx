@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function DateDisplay() {
   const [formattedDate, setFormattedDate] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,6 +19,7 @@ export default function DateDisplay() {
           })
           .replace(",", ""),
       );
+      setLoading(false);
     }, 1000);
 
     return () => clearInterval(interval);
@@ -25,7 +27,13 @@ export default function DateDisplay() {
 
   return (
     <h1 className="text-stroke-rose text-center text-4xl font-bold text-white">
-      {formattedDate}
+      {loading ? (
+        <div className="flex justify-center">
+          <div className="mt-1 h-8 w-60 animate-pulse bg-gray-300"></div>
+        </div>
+      ) : (
+        formattedDate
+      )}
     </h1>
   );
 }
