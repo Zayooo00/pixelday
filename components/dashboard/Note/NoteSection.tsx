@@ -1,17 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { GiJusticeStar } from "react-icons/gi";
 import { useEffect, useState } from "react";
+import { GiJusticeStar } from "react-icons/gi";
 import { ImPlus } from "react-icons/im";
 
 import CreateNoteModal from "./CreateNoteModal";
 import PreviewNoteModal from "./PreviewNoteModal";
-import Spinner from "@/components/common/spinner";
+import { NotePlaceholder } from "./NotePlaceholder";
 
+import { getUserNotes } from "@/services/notes";
 import { TNote } from "@/types/notes";
 import { TUserInfo } from "@/types/users";
-import { getUserNotes } from "@/services/notes";
 
 export default function NoteSection({
   currentUser,
@@ -22,6 +22,7 @@ export default function NoteSection({
   const [selectedNote, setSelectedNote] = useState<TNote | null>(null);
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] = useState(false);
   const [isPreviewNoteModalOpen, setIsPreviewNoteModalOpen] = useState(false);
+  const colors = ["bg-red-500", "bg-emerald-500", "bg-rose-400"];
   const [isLoading, setIsLoading] = useState(true);
 
   const handleNoteClick = (note: TNote) => {
@@ -46,8 +47,6 @@ export default function NoteSection({
     fetchNotes();
   }, [currentUser]);
 
-  const colors = ["bg-red-500", "bg-emerald-500", "bg-rose-400"];
-
   return (
     <>
       <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
@@ -66,8 +65,10 @@ export default function NoteSection({
       <div className="h-[382px] md:h-full lg:h-[382px] border-[10px] border-red-900 bg-amber-50 overflow-y-auto overflow-x-hidden">
         <div className="-mb-0.5">
           {isLoading ? (
-            <div className="mt-4 flex justify-center items-center">
-              <Spinner size={3} />
+            <div className="w-full h-full pt-2 pl-2 pr-[13px] xl:block xl:flex-col lg:grid lg:grid-cols-2 gap-4">
+              {[...Array(3)].map((_, index) => (
+                <NotePlaceholder key={index} />
+              ))}
             </div>
           ) : (
             <div className="w-full h-full pt-2 pl-2 pr-[13px] xl:block xl:flex-col lg:grid lg:grid-cols-2 gap-4">
@@ -90,7 +91,7 @@ export default function NoteSection({
                     />
                   </div>
                   <div className="flex-grow">
-                    <div className="text-xl lg:-ml-[15px] max-w-[14rem] break-all xl:-ml-0 font-medium text-white xl:text-left text-center">
+                    <div className="text-xl lg:-ml-[15px] lg:max-w-[14rem] break-word xl:-ml-0 font-medium text-white xl:text-left text-center">
                       {note.title}
                     </div>
                     <p className="max-w-[10dvw] xl:block hidden break-words text-gray-200">

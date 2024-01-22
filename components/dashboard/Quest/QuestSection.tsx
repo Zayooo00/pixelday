@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { GiJusticeStar } from "react-icons/gi";
 
-import Spinner from "@/components/common/spinner";
 import PreviewQuestModal from "./PreviewQuestModal";
+import { QuestPlaceholder } from "./PlaceholderQuest";
 import Quest from "./Quest";
 
 import { TUserInfo } from "@/types/users";
@@ -16,7 +16,7 @@ export default function QuestSection({
   currentUser: TUserInfo;
 }) {
   const [selectedQuest, setSelectedQuest] = useState<TQuest | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isPreviewQuestModalOpen, setIsPreviewQuestModalOpen] = useState(false);
   const { quests, setQuests } = useQuests();
 
@@ -25,8 +25,8 @@ export default function QuestSection({
 
     setQuests((prevQuests) =>
       prevQuests.map((quest) =>
-        quest.questId === updatedQuest.questId ? updatedQuest : quest
-      )
+        quest.questId === updatedQuest.questId ? updatedQuest : quest,
+      ),
     );
   };
 
@@ -51,28 +51,33 @@ export default function QuestSection({
 
   return (
     <>
-      <div className="flex items-center border-x-[10px] border-t-[10px] p-2 border-red-900 bg-amber-50">
-        <GiJusticeStar className="text-red-900 text-3xl mr-2 border-2 border-red-900 bg-white" />
-        <h1 className="text-xl text-red-900 w-full pl-2 border-2 border-red-900 bg-white">
+      <div className="flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2">
+        <GiJusticeStar className="mr-2 border-2 border-red-900 bg-white text-3xl text-red-900" />
+        <h1 className="w-full border-2 border-red-900 bg-white pl-2 text-xl text-red-900">
           Quests
         </h1>
       </div>
-      <div className="h-full lg:h-[656px] p-2 px-6 border-[10px] border-red-900 bg-amber-50 overflow-x-hidden overflow-y-auto">
-        {isLoading ? (
-          <div className="mt-2 flex justify-center items-center">
-            <Spinner size={3} />
-          </div>
+      <div className="h-full overflow-y-auto overflow-x-hidden border-[10px] border-red-900 bg-amber-50 p-2 px-6 lg:h-[656px]">
+        {!isLoading ? (
+          <>
+            <div className="mb-5 mt-2 h-5 w-32 animate-pulse bg-gray-300" />
+            {Array.from({ length: 5 }).map((_, index) => (
+              <div key={index} className="mb-4">
+                <QuestPlaceholder />
+              </div>
+            ))}
+          </>
         ) : (
           <>
             {quests.filter(
-              (quest) => quest.type === "main" && quest.status !== "complete"
+              (quest) => quest.type === "main" && quest.status !== "complete",
             ).length > 0 && (
               <>
                 <h1 className="mb-2 text-2xl text-red-900">Main Quests</h1>
                 {quests
                   .filter(
                     (quest) =>
-                      quest.type === "main" && quest.status !== "complete"
+                      quest.type === "main" && quest.status !== "complete",
                   )
                   .map((quest, index) => (
                     <div key={index} onClick={() => handleQuestClick(quest)}>
@@ -87,16 +92,16 @@ export default function QuestSection({
             )}
             {quests.filter(
               (quest) =>
-                quest.type === "recurring" && quest.status !== "complete"
+                quest.type === "recurring" && quest.status !== "complete",
             ).length > 0 && (
               <>
-                <h1 className="mb-2 text-2xl text-red-900 mt-4">
+                <h1 className="mb-2 mt-4 text-2xl text-red-900">
                   Daily Quests
                 </h1>
                 {quests
                   .filter(
                     (quest) =>
-                      quest.type === "recurring" && quest.status !== "complete"
+                      quest.type === "recurring" && quest.status !== "complete",
                   )
                   .map((quest, index) => (
                     <div key={index} onClick={() => handleQuestClick(quest)}>
@@ -112,7 +117,7 @@ export default function QuestSection({
             {quests.filter((quest) => quest.status === "complete").length >
               0 && (
               <>
-                <h1 className="mb-2 text-2xl text-red-900 mt-4">
+                <h1 className="mb-2 mt-4 text-2xl text-red-900">
                   Complete Quests
                 </h1>
                 {quests
