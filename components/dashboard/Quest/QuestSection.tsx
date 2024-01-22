@@ -58,10 +58,22 @@ export default function QuestSection({
         </h1>
       </div>
       <div className="h-full overflow-y-auto overflow-x-hidden border-[10px] border-red-900 bg-amber-50 p-2 px-6 lg:h-[656px]">
-        {!isLoading ? (
+        {isLoading ? (
           <>
             <div className="mb-5 mt-2 h-5 w-32 animate-pulse bg-gray-300" />
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: 2 }).map((_, index) => (
+              <div key={index} className="mb-4">
+                <QuestPlaceholder />
+              </div>
+            ))}
+            <div className="mb-5 mt-2 h-5 w-32 animate-pulse bg-gray-300" />
+            {Array.from({ length: 1 }).map((_, index) => (
+              <div key={index} className="mb-4">
+                <QuestPlaceholder />
+              </div>
+            ))}
+            <div className="mb-5 mt-2 h-5 w-32 animate-pulse bg-gray-300" />
+            {Array.from({ length: 2 }).map((_, index) => (
               <div key={index} className="mb-4">
                 <QuestPlaceholder />
               </div>
