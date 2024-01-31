@@ -57,7 +57,7 @@ export default function SignUp() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-20 text-center">
       <Link href={"/"} className="-mt-16 sm:-mt-52">
-        <h1 className="title-text-stroke text-6xl font-bold text-white sm:text-8xl">
+        <h1 className="md-title-text-stroke sm:title-text-stroke text-6xl font-bold text-white sm:text-8xl">
           Pixel Day
         </h1>
       </Link>
