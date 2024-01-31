@@ -25,7 +25,7 @@ export default function RootLayout({
         {" "}
         <ToastProvider>
           <div
-            className="flex flex-col items-center justify-center bg-cover bg-center lg:h-[calc(100dvh)]"
+            className="flex flex-col items-center justify-center bg-cover bg-center h-[100dvh]"
             style={{
               backgroundImage: "url(/assets/images/splash-background-1.gif)",
               backgroundRepeat: "repeat",
