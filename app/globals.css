@@ -24,7 +24,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fda4af;
+  background: #fda6af;
 }
 
 .title-text-stroke {
@@ -37,6 +37,18 @@ body {
     -8px 0 0 #99201c,
     0 8px 0 #99201c,
     8px 0 0 #99201c;
+}
+
+.md-title-text-stroke {
+  text-shadow:
+    -6px -6px 0 #99201c,
+    6px -6px 0 #99201c,
+    -6px 6px 0 #99201c,
+    6px 6px 0 #99201c,
+    0 -6px 0 #99201c,
+    -6px 0 0 #99201c,
+    0 6px 0 #99201c,
+    6px 0 0 #99201c;
 }
 
 .text-stroke-red {
@@ -65,10 +77,10 @@ body {
 
 .text-stroke-orange {
   text-shadow:
-    -1px -1px 0 #c2410c,
-    1px -1px 0 #c2410c,
-    -1px 1px 0 #c2410c,
-    1px 1px 0 #c2410c;
+    -1px -1px 0 #c2610c,
+    1px -1px 0 #c2610c,
+    -1px 1px 0 #c2610c,
+    1px 1px 0 #c2610c;
 }
 
 @media (max-width: 638px) {
