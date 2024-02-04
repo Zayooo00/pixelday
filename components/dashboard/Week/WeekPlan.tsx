@@ -4,18 +4,11 @@ import {
   Draggable,
   DropResult,
 } from "@hello-pangea/dnd";
-import { useState, useEffect } from "react";
 
-import { getUserTasks, updateTask } from "@/services/tasks";
-import { useTasks } from "@/context/TasksContext";
-import { TTask } from "@/types/tasks";
+import { updateTask } from "@/services/tasks";
+import { WeekPlanProps } from "@/types/tasks";
 
-export default function WeekPlan({ uid }: { uid: string }) {
-  const { tasks, setTasks } = useTasks();
-  const [isLoading, setIsLoading] = useState(true);
-  const [weekDays, setWeekDays] = useState<{ date: string; tasks: TTask[] }[]>(
-    [],
-  );
+export default function WeekPlan({ weekDays, setWeekDays }: WeekPlanProps) {
 
   const dayNames = [
     "Sunday",
@@ -36,26 +29,6 @@ export default function WeekPlan({ uid }: { uid: string }) {
     "bg-teal-500",
     "bg-rose-500",
   ];
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      if (uid) {
-        const fetchedTasks = await getUserTasks(uid);
-        const newWeekDays = Array(6)
-          .fill(0)
-          .map((_, i) => {
-            const d = new Date();
-            d.setDate(d.getDate() - 1 + i);
-            const date = d.toISOString().split("T")[0];
-            const dayTasks = fetchedTasks.filter((task) => task.date === date);
-            return { date, tasks: dayTasks ? dayTasks : [] };
-          });
-        setWeekDays(newWeekDays);
-      }
-    };
-
-    fetchTasks();
-  }, [uid, tasks]);
 
   const onDragEnd = async (result: DropResult) => {
     if (!result.destination) return;
