@@ -1,11 +1,15 @@
 import { GiJusticeStar } from "react-icons/gi";
 import { ImPlus } from "react-icons/im";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { TUserInfo } from "@/types/users";
 
 import WeekPlan from "./WeekPlan";
 import CreateTaskModal from "./CreateTaskModal";
+import WeekPlaceholder from "./WeekPlaceholder";
+
+import { TTask } from "@/types/tasks";
+import { getUserTasks } from "@/services/tasks";
 
 export default function WeekSection({
   currentUser,
@@ -13,6 +17,31 @@ export default function WeekSection({
   currentUser: TUserInfo;
 }) {
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
+  const [weekDays, setWeekDays] = useState<{ date: string; tasks: TTask[] }[]>(
+    [],
+  );
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      if (currentUser.uid) {
+        const fetchedTasks = await getUserTasks(currentUser.uid);
+        const newWeekDays = Array(6)
+          .fill(0)
+          .map((_, i) => {
+            const d = new Date();
+            d.setDate(d.getDate() - 1 + i);
+            const date = d.toISOString().split("T")[0];
+            const dayTasks = fetchedTasks.filter((task) => task.date === date);
+            return { date, tasks: dayTasks ? dayTasks : [] };
+          });
+        setWeekDays(newWeekDays);
+        setIsLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, [currentUser.uid]);
 
   return (
     <>
@@ -29,7 +58,16 @@ export default function WeekSection({
           </button>
         </div>
       </div>
-      <WeekPlan uid={currentUser.uid} />
+      {isLoading ? (
+        <>
+          <WeekPlaceholder />
+        </>
+      ) : (
+        <WeekPlan
+          weekDays={weekDays}
+          setWeekDays={setWeekDays}
+        />
+      )}
       {isCreateTaskModalOpen && (
         <CreateTaskModal
           isOpen={isCreateTaskModalOpen}
