@@ -17,7 +17,7 @@ export default function AddQuestSection({
 
   return (
     <>
-      <div className="mt-[44px] flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2 md:mt-[58px] lg:-mt-[20px]">
+      <div className="mt-[44px] flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2 md:mt-[58px] lg:-mt-[30px]">
         <GiJusticeStar className="mr-2 border-2 border-red-900 bg-white text-3xl text-red-900" />
         <h1 className="w-full border-2 border-red-900 bg-white pl-2 text-xl text-red-900">
           Add quests

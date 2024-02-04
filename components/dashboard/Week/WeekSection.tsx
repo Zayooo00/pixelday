@@ -1,38 +1,42 @@
 import { GiJusticeStar } from "react-icons/gi";
+import { ImPlus } from "react-icons/im";
+import { useState } from "react";
 
-export default function WeekSection() {
-  const weekDays = {
-    Monday: "bg-red-500",
-    Tuesday: "bg-cyan-500",
-    Wednesday: "bg-emerald-400",
-    Thursday: "bg-sky-500",
-    Friday: "bg-lime-400",
-    Saturday: "bg-teal-500",
-    Sunday: "bg-rose-500",
-  };
+import { TUserInfo } from "@/types/users";
+
+import WeekPlan from "./WeekPlan";
+import CreateTaskModal from "./CreateTaskModal";
+
+export default function WeekSection({
+  currentUser,
+}: {
+  currentUser: TUserInfo;
+}) {
+  const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
 
   return (
     <>
-      <div className="mt-[44px] flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2 md:mt-[51px] lg:-mt-[68px]">
+      <div className="mt-[44px] flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2 md:mt-[51px] lg:-mt-[72px]">
         <GiJusticeStar className="mr-2 border-2 border-red-900 bg-white text-3xl text-red-900" />
-        <h1 className="w-full border-2 border-red-900 bg-white pl-2 text-xl text-red-900">
-          Plan your week
-        </h1>
+        <div className="flex w-full items-center justify-between border-2 border-red-900 bg-white pl-2">
+          <h1 className="text-xl text-red-900">Your week plan</h1>
+          <button
+            className="duration-600 mr-1 rounded-full p-1 transition-colors hover:bg-rose-200"
+            title="Create a new task"
+            onClick={() => setIsCreateTaskModalOpen(true)}
+          >
+            <ImPlus className="text-red-700" />
+          </button>
+        </div>
       </div>
-      <div className="grid grid-cols-7 gap-4 border-[10px] border-red-900 bg-amber-50 p-4 lg:h-[105.75%]">
-        {Object.entries(weekDays).map(([day, colorClass], index) => (
-          <div key={index} className="flex flex-col items-center">
-            <div
-              className={`${colorClass} mt-2 h-[300px] w-full p-2 lg:h-full`}
-            >
-              <b>Day {index + 1}</b>
-            </div>
-            <h2 className="lg:text-md sm:text-xs md:text-sm xl:text-xl">
-              {day}
-            </h2>
-          </div>
-        ))}
-      </div>
+      <WeekPlan uid={currentUser.uid} />
+      {isCreateTaskModalOpen && (
+        <CreateTaskModal
+          isOpen={isCreateTaskModalOpen}
+          onClose={() => setIsCreateTaskModalOpen(false)}
+          uid={currentUser.uid}
+        />
+      )}
     </>
   );
 }

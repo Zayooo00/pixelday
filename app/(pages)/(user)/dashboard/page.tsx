@@ -14,6 +14,7 @@ import Toast from "@/components/common/toast";
 import { TUserInfo } from "@/types/users";
 import { auth } from "@/firebase/firebase";
 import { QuestProvider } from "@/context/QuestsContext";
+import { TaskProvider } from "@/context/TasksContext";
 import { useToast } from "@/context/ToastContext";
 
 export default function Dashboard() {
@@ -38,6 +39,7 @@ export default function Dashboard() {
 
   return (
     <QuestProvider>
+      <TaskProvider>
       <div className="grid-rows-10 md:grid-rows-10 my-4 grid w-11/12 grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-4 lg:my-20 lg:grid-cols-4 lg:grid-rows-3">
         <Toast
           message={toast.message}
@@ -52,7 +54,7 @@ export default function Dashboard() {
           <NoteSection currentUser={currentUser} />
         </div>
         <div className="row-start-9 col-span-2 col-start-1 row-span-2 md:col-start-1 md:row-start-6 md:-mr-4 lg:col-start-2 lg:row-start-2 lg:-mr-0">
-          <WeekSection />
+          <WeekSection currentUser={currentUser} />
         </div>
         <div className="col-span-1 col-start-1 row-span-2 row-start-4 md:col-span-2 md:col-start-2 md:row-start-2 lg:col-start-4 lg:row-span-4 lg:row-start-1">
           <QuestSection currentUser={currentUser} />
@@ -61,6 +63,7 @@ export default function Dashboard() {
           <AddQuestSection currentUser={currentUser} />
         </div>
       </div>
+      </TaskProvider>
     </QuestProvider>
   );
 }
