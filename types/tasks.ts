@@ -11,3 +11,13 @@ export type TCreateTaskModalProps = {
   onClose: () => void;
   uid: string;
 };
+
+export type TWeekDay = {
+  date: string;
+  tasks: TTask[];
+};
+
+export type WeekPlanProps = {
+  weekDays: TWeekDay[];
+  setWeekDays: React.Dispatch<React.SetStateAction<TWeekDay[]>>;
+};
