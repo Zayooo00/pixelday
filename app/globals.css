@@ -86,7 +86,7 @@ body {
 @media (max-width: 638px) {
   img {
     max-width: none;
-    height: auto;
+    height: revert-layer;
   }
 }
 
