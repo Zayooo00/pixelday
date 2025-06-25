@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.5.0",
-    "firebase": "^10.5.2",
+    "firebase": "^10.9.0",
     "next": "14.2.30",
     "react": "^18",
     "react-dom": "^18",
