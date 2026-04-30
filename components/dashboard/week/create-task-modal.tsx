@@ -1,6 +1,7 @@
-﻿import { useState } from "react";
 import Image from "next/image";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
@@ -8,13 +9,11 @@ import Error from "@/components/common/error";
 
 import { useToast } from "@/context/toast-context";
 import { useTasks } from "@/context/tasks-context";
-import { CreateTaskModalProps, Task } from "@/types/tasks";
+import { CreateTaskModalProps } from "@/types/tasks";
 import { createTask } from "@/services/tasks";
 import { cn } from "@/helpers/cn";
 
 const TaskSchema = z.object({
-  uid: z.string(),
-  taskId: z.string(),
   title: z
     .string()
     .min(1, "Title cannot be empty")
@@ -26,6 +25,8 @@ const TaskSchema = z.object({
   hour: z.string().min(1, "Hour cannot be empty"),
 });
 
+type TaskFormData = z.infer<typeof TaskSchema>;
+
 const INPUT_CLASSES =
   "mb-4 mt-4 w-full rounded-md border-2 border-red-500 bg-white bg-opacity-50 p-2 text-xl transition-colors duration-500 focus:border-red-900 focus:outline-none";
 
@@ -34,39 +35,20 @@ export default function CreateTaskModal({
   onClose,
   uid,
 }: CreateTaskModalProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
-  const [newTask, setNewTask] = useState<Task>({
-    uid,
-    taskId: "",
-    title: "",
-    date: "",
-    hour: "",
-  });
   const { setTasks } = useTasks();
   const { setToast } = useToast();
 
-  const handleCreateTask = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const validatedTask = TaskSchema.parse(newTask);
-      const createdTask = await createTask(validatedTask);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TaskFormData>({ resolver: zodResolver(TaskSchema) });
 
-      setTasks((prevTasks) => [...prevTasks, createdTask]);
-      setToast({
-        isVisible: true,
-        message: "Task created successfully",
-        type: "success",
-      });
-      onClose();
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        setErrors(error.errors.map((err) => err.message));
-      }
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = async (data: TaskFormData) => {
+    const createdTask = await createTask({ ...data, uid, taskId: "" });
+    setTasks((prev) => [...prev, createdTask]);
+    setToast({ isVisible: true, message: "Task created successfully", type: "success" });
+    onClose();
   };
 
   if (!isOpen) {
@@ -80,7 +62,7 @@ export default function CreateTaskModal({
       background="/assets/images/quest-board.png"
       backgroundAlt="Quest background"
       as="form"
-      onSubmit={handleCreateTask}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mt-12 flex w-full flex-col items-center sm:mt-24 md:mt-12">
         <Image
@@ -92,40 +74,37 @@ export default function CreateTaskModal({
         />
         <h1 className="mt-2 text-4xl text-black">Create a new task</h1>
         <div className="mt-2 w-[60vw] text-left sm:w-[35vw] md:w-[30vw] lg:w-[320px]">
-          {errors.map((error, index) => (
-            <Error key={index} message={error} />
-          ))}
+          {errors.title && <Error message={errors.title.message ?? ""} />}
+          {errors.date && <Error message={errors.date.message ?? ""} />}
+          {errors.hour && <Error message={errors.hour.message ?? ""} />}
         </div>
         <div className="w-[60vw] sm:w-[35vw] md:w-[30vw] lg:w-[320px]">
           <input
+            {...register("title")}
             placeholder="Task title goes here"
             className={INPUT_CLASSES}
-            value={newTask.title}
-            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
           />
           <input
+            {...register("date")}
             type="date"
             className={INPUT_CLASSES}
-            value={newTask.date}
-            onChange={(e) => setNewTask({ ...newTask, date: e.target.value })}
           />
           <input
+            {...register("hour")}
             type="time"
             className={INPUT_CLASSES}
-            value={newTask.hour}
-            onChange={(e) => setNewTask({ ...newTask, hour: e.target.value })}
           />
         </div>
       </div>
       <button
-        disabled={isLoading}
+        disabled={isSubmitting}
         className={cn(
-          "w-42 text-stroke-red mb-8 transform border-x-4 border-b-8 border-t-4 border-red-900 bg-red-500 p-2 px-4 py-1 text-xl text-amber-50 transition-transform duration-300 hover:scale-105",
-          isLoading && "cursor-not-allowed",
+          "w-42 mb-8 transform border-x-4 border-b-8 border-t-4 border-red-900 bg-red-500 p-2 px-4 py-1 text-xl text-amber-50 transition-transform duration-300 hover:scale-105",
+          isSubmitting && "cursor-not-allowed",
         )}
         type="submit"
       >
-        {isLoading ? <Spinner /> : "Create task"}
+        {isSubmitting ? <Spinner /> : "Create task"}
       </button>
     </ModalShell>
   );
