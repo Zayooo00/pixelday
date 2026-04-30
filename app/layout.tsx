@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { VT323 } from "next/font/google";
+import Image from "next/image";
+
 import { ToastProvider } from "@/context/ToastContext";
 
 import "./globals.css";
@@ -22,15 +24,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        {" "}
         <ToastProvider>
-          <div
-            className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100dvh]"
-            style={{
-              backgroundImage: "url(/assets/images/splash-background-1.gif)",
-              backgroundRepeat: "repeat",
-            }}
-          >
+          <div className="relative flex min-h-[100dvh] flex-col items-center justify-center">
+            <Image
+              src="/assets/images/splash-background-1.gif"
+              alt=""
+              fill
+              priority
+              unoptimized
+              sizes="100vw"
+              aria-hidden="true"
+              className="-z-10 object-cover"
+            />
             {children}
           </div>
         </ToastProvider>

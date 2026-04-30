@@ -10,7 +10,9 @@ type TModalProps = {
 export default function Modal({ isOpen, onClose, children }: TModalProps) {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.keyCode === 27) onClose();
+      if (event.key === "Escape") {
+        onClose();
+      }
     };
     window.addEventListener("keydown", handleEsc);
 
@@ -19,7 +21,9 @@ export default function Modal({ isOpen, onClose, children }: TModalProps) {
     };
   }, [onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
