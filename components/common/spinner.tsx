@@ -1,10 +1,19 @@
-export default function Spinner() {
+interface SpinnerProps {
+  size?: "sm" | "md" | "lg";
+}
+
+const SIZE_CLASSES = {
+  sm: "w-4 h-4",
+  md: "w-6 h-6",
+  lg: "w-8 h-8",
+};
+
+export default function Spinner({ size = "sm" }: SpinnerProps) {
   return (
     <svg
       role="status"
       aria-label="Loading"
-      className="inline animate-spin fill-red-600 text-gray-200"
-      style={{ width: "1em", height: "1em", verticalAlign: "-0.125em" }}
+      className={`inline animate-spin fill-red-600 text-gray-200 ${SIZE_CLASSES[size]}`}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
