@@ -56,7 +56,7 @@ export default function CreateQuestModal({
 
   const onSubmit = async ({ title }: QuestFormData) => {
     const createdQuest = await createQuest(
-      { title, questId: "", uid, status: "active", type: questType },
+      { title, questId: "", uid },
       uid,
       questType,
     );
