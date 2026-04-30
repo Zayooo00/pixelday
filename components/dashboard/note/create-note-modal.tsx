@@ -5,7 +5,7 @@ import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 import Error from "@/components/common/error";
 
-import { NoteSchema } from "@/helpers/createNoteValidator";
+import { NoteSchema } from "@/helpers/validators";
 import { TCreateNoteModalProps, TNote } from "@/types/notes";
 import { useToast } from "@/context/ToastContext";
 import { createNote } from "@/services/notes";

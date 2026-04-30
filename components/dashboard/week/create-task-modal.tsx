@@ -10,7 +10,7 @@ import { useToast } from "@/context/ToastContext";
 import { useTasks } from "@/context/TasksContext";
 import { TCreateTaskModalProps, TTask } from "@/types/tasks";
 import { createTask } from "@/services/tasks";
-import { TaskSchema } from "@/helpers/createTaskValidator";
+import { TaskSchema } from "@/helpers/validators";
 import { cn } from "@/helpers/cn";
 
 const INPUT_CLASSES =

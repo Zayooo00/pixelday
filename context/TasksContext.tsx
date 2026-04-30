@@ -1,30 +1,12 @@
-import React, { createContext, useState, useContext } from "react";
-
 import { TTask } from "@/types/tasks";
+import { createListContext } from "./create-list-context";
 
-type TaskContextType = {
-  tasks: TTask[];
-  setTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
-};
+const { Provider: TaskProvider, useList: _useTasks } =
+  createListContext<TTask>("Tasks");
 
-const TaskContext = createContext<TaskContextType | undefined>(undefined);
-
-export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [tasks, setTasks] = useState<TTask[]>([]);
-
-  return (
-    <TaskContext.Provider value={{ tasks, setTasks }}>
-      {children}
-    </TaskContext.Provider>
-  );
-};
+export { TaskProvider };
 
 export const useTasks = () => {
-  const context = useContext(TaskContext);
-  if (context === undefined) {
-    throw new Error("useTasks must be used within a TaskProvider");
-  }
-  return context;
+  const { items: tasks, setItems: setTasks } = _useTasks();
+  return { tasks, setTasks };
 };

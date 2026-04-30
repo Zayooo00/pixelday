@@ -10,7 +10,7 @@ import { useToast } from "@/context/ToastContext";
 import { useQuests } from "@/context/QuestsContext";
 import { TCreateQuestModalProps, TQuest } from "@/types/quests";
 import { createQuest } from "@/services/quests";
-import { QuestSchema } from "@/helpers/createQuestValidator";
+import { QuestSchema } from "@/helpers/validators";
 import { cn } from "@/helpers/cn";
 
 const QUEST_THEME = {

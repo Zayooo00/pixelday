@@ -3,7 +3,7 @@
 import SectionHeader from "@/components/common/section-header";
 
 import PreviewQuestModal from "./preview-quest-modal";
-import { QuestPlaceholder } from "./placeholder-quest";
+import { QuestPlaceholder } from "./quest-placeholder";
 import Quest from "./quest";
 
 import { TUserInfo } from "@/types/users";
