@@ -1,14 +1,14 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import SectionHeader from "@/components/common/SectionHeader";
-import AddButton from "@/components/common/AddButton";
+import SectionHeader from "@/components/common/section-header";
+import AddButton from "@/components/common/add-button";
 
-import CreateNoteModal from "./CreateNoteModal";
-import PreviewNoteModal from "./PreviewNoteModal";
-import { NotePlaceholder } from "./NotePlaceholder";
+import CreateNoteModal from "./create-note-modal";
+import PreviewNoteModal from "./preview-note-modal";
+import { NotePlaceholder } from "./note-placeholder";
 
 import { getUserNotes } from "@/services/notes";
 import { TNote } from "@/types/notes";

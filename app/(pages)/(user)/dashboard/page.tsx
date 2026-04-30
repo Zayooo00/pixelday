@@ -1,14 +1,14 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useEffect } from "react";
 
-import NoteSection from "@/components/dashboard/Note/NoteSection";
-import AddQuestSection from "@/components/dashboard/AddQuest/AddQuestSection";
-import WelcomeSection from "@/components/dashboard/Welcome/WelcomeSection";
-import WeekSection from "@/components/dashboard/Week/WeekSection";
-import QuestSection from "@/components/dashboard/Quest/QuestSection";
+import NoteSection from "@/components/dashboard/note/note-section";
+import AddQuestSection from "@/components/dashboard/add-quest/add-quest-section";
+import WelcomeSection from "@/components/dashboard/welcome/welcome-section";
+import WeekSection from "@/components/dashboard/week/week-section";
+import QuestSection from "@/components/dashboard/quest/quest-section";
 import Toast from "@/components/common/toast";
 
 import { TUserInfo } from "@/types/users";

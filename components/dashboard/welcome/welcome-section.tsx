@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
 
-import SectionHeader from "@/components/common/SectionHeader";
-import DateDisplay from "@/components/common/dateDisplay";
+import SectionHeader from "@/components/common/section-header";
+import DateDisplay from "@/components/common/date-display";
 
 import { auth } from "@/firebase/firebase";
 import { TUserInfo } from "@/types/users";

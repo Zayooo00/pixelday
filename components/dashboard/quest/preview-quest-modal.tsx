@@ -1,7 +1,7 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { useState, useEffect } from "react";
 
-import ModalShell from "@/components/common/ModalShell";
+import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 
 import { TPreviewQuestModalProps } from "@/types/quests";

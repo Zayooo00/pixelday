@@ -1,8 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import Image from "next/image";
 import { z } from "zod";
 
-import ModalShell from "@/components/common/ModalShell";
+import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 import Error from "@/components/common/error";
 

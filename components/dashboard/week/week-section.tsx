@@ -1,15 +1,15 @@
-import { useState, useEffect, useMemo } from "react";
+﻿import { useState, useEffect, useMemo } from "react";
 
-import SectionHeader from "@/components/common/SectionHeader";
-import AddButton from "@/components/common/AddButton";
+import SectionHeader from "@/components/common/section-header";
+import AddButton from "@/components/common/add-button";
 
 import { TUserInfo } from "@/types/users";
 import { useTasks } from "@/context/TasksContext";
 import { getUserTasks } from "@/services/tasks";
 
-import WeekPlan from "./WeekPlan";
-import CreateTaskModal from "./CreateTaskModal";
-import WeekPlaceholder from "./WeekPlaceholder";
+import WeekPlan from "./week-plan";
+import CreateTaskModal from "./create-task-modal";
+import WeekPlaceholder from "./week-placeholder";
 
 const DAYS_IN_WEEK = 6;
 

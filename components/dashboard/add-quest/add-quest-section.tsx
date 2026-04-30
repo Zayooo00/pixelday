@@ -1,11 +1,11 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
-import SectionHeader from "@/components/common/SectionHeader";
+import SectionHeader from "@/components/common/section-header";
 
 import { TUserInfo } from "@/types/users";
 import { TQuestType } from "@/types/quests";
 
-import CreateQuestModal from "./CreateQuestModal";
+import CreateQuestModal from "./create-quest-modal";
 
 const QUEST_BUTTONS: {
   type: TQuestType;

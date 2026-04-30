@@ -1,4 +1,4 @@
-import ModalShell from "@/components/common/ModalShell";
+﻿import ModalShell from "@/components/common/modal-shell";
 
 import { TPreviewNoteModalProps } from "@/types/notes";
 

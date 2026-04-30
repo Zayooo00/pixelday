@@ -1,4 +1,4 @@
-import { questColors } from "@/constants/questColors";
+import { questColors } from "@/constants/quest-colors";
 import { TQuestProps } from "@/types/quests";
 
 export default function Quest({ title, type, status }: TQuestProps) {

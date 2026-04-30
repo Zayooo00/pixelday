@@ -1,10 +1,10 @@
-import { useState, useEffect, useMemo } from "react";
+﻿import { useState, useEffect, useMemo } from "react";
 
-import SectionHeader from "@/components/common/SectionHeader";
+import SectionHeader from "@/components/common/section-header";
 
-import PreviewQuestModal from "./PreviewQuestModal";
-import { QuestPlaceholder } from "./PlaceholderQuest";
-import Quest from "./Quest";
+import PreviewQuestModal from "./preview-quest-modal";
+import { QuestPlaceholder } from "./placeholder-quest";
+import Quest from "./quest";
 
 import { TUserInfo } from "@/types/users";
 import { TQuest } from "@/types/quests";
