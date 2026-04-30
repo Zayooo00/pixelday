@@ -41,7 +41,7 @@ export default function WelcomeSection({
             onClick={handleLogout}
             title="Logout"
           >
-            <BiLogOut className="text-red-700" />
+            <BiLogOut strokeWidth={2} className="text-red-700" />
           </button>
         }
       />
