@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-type TModalProps = {
+type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-export default function Modal({ isOpen, onClose, children }: TModalProps) {
+export default function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {

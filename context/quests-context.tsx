@@ -1,8 +1,8 @@
-import { TQuest } from "@/types/quests";
+﻿import { Quest } from "@/types/quests";
 import { createListContext } from "./create-list-context";
 
 const { Provider: QuestProvider, useList: _useQuests } =
-  createListContext<TQuest>("Quests");
+  createListContext<Quest>("Quests");
 
 export { QuestProvider };
 

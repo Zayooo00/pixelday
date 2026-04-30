@@ -3,8 +3,8 @@
 import SectionHeader from "@/components/common/section-header";
 import AddButton from "@/components/common/add-button";
 
-import { TUserInfo } from "@/types/users";
-import { useTasks } from "@/context/TasksContext";
+import { UserInfo } from "@/types/users";
+import { useTasks } from "@/context/tasks-context";
 import { getUserTasks } from "@/services/tasks";
 
 import WeekPlan from "./week-plan";
@@ -24,7 +24,7 @@ function buildWeekDates(): string[] {
 export default function WeekSection({
   currentUser,
 }: {
-  currentUser: TUserInfo;
+  currentUser: UserInfo;
 }) {
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

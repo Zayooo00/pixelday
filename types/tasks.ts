@@ -1,4 +1,4 @@
-export type TTask = {
+﻿export type Task = {
   uid: string;
   taskId: string;
   title: string;
@@ -6,13 +6,13 @@ export type TTask = {
   hour: string;
 };
 
-export type TCreateTaskModalProps = {
+export type CreateTaskModalProps = {
   isOpen: boolean;
   onClose: () => void;
   uid: string;
 };
 
-export type TWeekDay = {
+export type WeekDay = {
   date: string;
-  tasks: TTask[];
+  tasks: Task[];
 };

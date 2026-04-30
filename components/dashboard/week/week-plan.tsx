@@ -1,4 +1,4 @@
-import {
+﻿import {
   DragDropContext,
   Droppable,
   Draggable,
@@ -6,8 +6,8 @@ import {
 } from "@hello-pangea/dnd";
 
 import { updateTask } from "@/services/tasks";
-import { useTasks } from "@/context/TasksContext";
-import { TWeekDay } from "@/types/tasks";
+import { useTasks } from "@/context/tasks-context";
+import { WeekDay } from "@/types/tasks";
 
 const DAY_NAMES = [
   "Sunday",
@@ -30,7 +30,7 @@ const COLOR_CLASSES = [
 ];
 
 type WeekPlanProps = {
-  weekDays: TWeekDay[];
+  weekDays: WeekDay[];
 };
 
 export default function WeekPlan({ weekDays }: WeekPlanProps) {

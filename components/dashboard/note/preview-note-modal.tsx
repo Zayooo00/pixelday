@@ -1,12 +1,12 @@
 ﻿import ModalShell from "@/components/common/modal-shell";
 
-import { TPreviewNoteModalProps } from "@/types/notes";
+import { PreviewNoteModalProps } from "@/types/notes";
 
 export default function PreviewNoteModal({
   isOpen,
   onClose,
   selectedNote,
-}: TPreviewNoteModalProps) {
+}: PreviewNoteModalProps) {
   return (
     <ModalShell
       isOpen={isOpen}

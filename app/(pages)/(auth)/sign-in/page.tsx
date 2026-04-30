@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ import {
   ERROR_MISSING_PASSWORD,
   ERROR_NETWORK_REQUEST_FAILED,
   ERROR_POPUP_CLOSED,
-} from "@/constants/firebaseErrorCodes";
+} from "@/constants/firebase-error-codes";
 
 export default function SignIn() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });

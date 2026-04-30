@@ -7,12 +7,12 @@ import SectionHeader from "@/components/common/section-header";
 import DateDisplay from "@/components/common/date-display";
 
 import { auth } from "@/firebase/firebase";
-import { TUserInfo } from "@/types/users";
+import { UserInfo } from "@/types/users";
 
 export default function WelcomeSection({
   currentUser,
 }: {
-  currentUser: TUserInfo;
+  currentUser: UserInfo;
 }) {
   const router = useRouter();
 

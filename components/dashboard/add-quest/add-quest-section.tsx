@@ -2,13 +2,13 @@
 
 import SectionHeader from "@/components/common/section-header";
 
-import { TUserInfo } from "@/types/users";
-import { TQuestType } from "@/types/quests";
+import { UserInfo } from "@/types/users";
+import { QuestType } from "@/types/quests";
 
 import CreateQuestModal from "./create-quest-modal";
 
 const QUEST_BUTTONS: {
-  type: TQuestType;
+  type: QuestType;
   label: string;
   className: string;
 }[] = [
@@ -27,9 +27,9 @@ const QUEST_BUTTONS: {
 export default function AddQuestSection({
   currentUser,
 }: {
-  currentUser: TUserInfo;
+  currentUser: UserInfo;
 }) {
-  const [openType, setOpenType] = useState<TQuestType | null>(null);
+  const [openType, setOpenType] = useState<QuestType | null>(null);
 
   return (
     <>

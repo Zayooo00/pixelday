@@ -6,12 +6,25 @@ import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 import Error from "@/components/common/error";
 
-import { useToast } from "@/context/ToastContext";
-import { useTasks } from "@/context/TasksContext";
-import { TCreateTaskModalProps, TTask } from "@/types/tasks";
+import { useToast } from "@/context/toast-context";
+import { useTasks } from "@/context/tasks-context";
+import { CreateTaskModalProps, Task } from "@/types/tasks";
 import { createTask } from "@/services/tasks";
-import { TaskSchema } from "@/helpers/validators";
 import { cn } from "@/helpers/cn";
+
+const TaskSchema = z.object({
+  uid: z.string(),
+  taskId: z.string(),
+  title: z
+    .string()
+    .min(1, "Title cannot be empty")
+    .max(20, "Title cannot exceed 20 characters")
+    .refine((v) => v.trim().length > 0, {
+      message: "Title cannot consist of just empty spaces",
+    }),
+  date: z.string().min(1, "Date cannot be empty"),
+  hour: z.string().min(1, "Hour cannot be empty"),
+});
 
 const INPUT_CLASSES =
   "mb-4 mt-4 w-full rounded-md border-2 border-red-500 bg-white bg-opacity-50 p-2 text-xl transition-colors duration-500 focus:border-red-900 focus:outline-none";
@@ -20,10 +33,10 @@ export default function CreateTaskModal({
   isOpen,
   onClose,
   uid,
-}: TCreateTaskModalProps) {
+}: CreateTaskModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
-  const [newTask, setNewTask] = useState<TTask>({
+  const [newTask, setNewTask] = useState<Task>({
     uid,
     taskId: "",
     title: "",

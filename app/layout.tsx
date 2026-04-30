@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import Image from "next/image";
 
-import { ToastProvider } from "@/context/ToastContext";
+import { ToastProvider } from "@/context/toast-context";
 
 import "./globals.css";
 

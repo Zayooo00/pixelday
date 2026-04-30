@@ -5,9 +5,22 @@ import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 import Error from "@/components/common/error";
 
-import { NoteSchema } from "@/helpers/validators";
-import { TCreateNoteModalProps, TNote } from "@/types/notes";
-import { useToast } from "@/context/ToastContext";
+import { CreateNoteModalProps, Note } from "@/types/notes";
+
+const NoteSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title cannot be empty")
+    .max(20, "Title cannot exceed 20 characters")
+    .refine((v) => v.trim().length > 0, {
+      message: "Title cannot consist of just empty spaces",
+    }),
+  content: z
+    .string()
+    .max(200, "Content cannot exceed 200 characters")
+    .transform((v) => v.trim()),
+});
+import { useToast } from "@/context/toast-context";
 import { createNote } from "@/services/notes";
 import { cn } from "@/helpers/cn";
 
@@ -18,8 +31,8 @@ export default function CreateNoteModal({
   onClose,
   uid,
   onNoteCreated,
-}: TCreateNoteModalProps) {
-  const [newNote, setNewNote] = useState<TNote>({ title: "", content: "" });
+}: CreateNoteModalProps) {
+  const [newNote, setNewNote] = useState<Note>({ title: "", content: "" });
   const [titleErrors, setTitleErrors] = useState<string[]>([]);
   const [contentErrors, setContentErrors] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);

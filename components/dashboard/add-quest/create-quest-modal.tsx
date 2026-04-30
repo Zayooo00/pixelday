@@ -6,12 +6,24 @@ import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 import Error from "@/components/common/error";
 
-import { useToast } from "@/context/ToastContext";
-import { useQuests } from "@/context/QuestsContext";
-import { TCreateQuestModalProps, TQuest } from "@/types/quests";
+import { useToast } from "@/context/toast-context";
+import { useQuests } from "@/context/quests-context";
+import { CreateQuestModalProps, Quest } from "@/types/quests";
 import { createQuest } from "@/services/quests";
-import { QuestSchema } from "@/helpers/validators";
 import { cn } from "@/helpers/cn";
+
+const QuestSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title cannot be empty")
+    .max(20, "Title cannot exceed 20 characters")
+    .refine((v) => v.trim().length > 0, {
+      message: "Title cannot consist of just empty spaces",
+    }),
+  status: z.string(),
+  uid: z.string(),
+  type: z.string(),
+});
 
 const QUEST_THEME = {
   main: {
@@ -33,10 +45,10 @@ export default function CreateQuestModal({
   onClose,
   uid,
   questType,
-}: TCreateQuestModalProps) {
+}: CreateQuestModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
-  const [newQuest, setNewQuest] = useState<TQuest>({
+  const [newQuest, setNewQuest] = useState<Quest>({
     questId: "",
     title: "",
     status: "active",

@@ -1,7 +1,7 @@
-import { questColors } from "@/constants/quest-colors";
-import { TQuestProps } from "@/types/quests";
+﻿import { questColors } from "@/constants/quest-colors";
+import { QuestProps } from "@/types/quests";
 
-export default function Quest({ title, type, status }: TQuestProps) {
+export default function QuestCard({ title, type, status }: QuestProps) {
   const color = questColors[type][status];
 
   return (

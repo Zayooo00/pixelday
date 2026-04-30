@@ -1,4 +1,4 @@
-import { db } from "@/firebase/firebase";
+﻿import { db } from "@/firebase/firebase";
 import {
   collection,
   doc,
@@ -11,16 +11,16 @@ import {
   where,
 } from "firebase/firestore";
 
-import { TNote } from "../types/notes";
+import { Note } from "../types/notes";
 
 const notesCollection = collection(db, "notes");
 
-export const createNote = async (note: TNote, uid: string): Promise<TNote> => {
+export const createNote = async (note: Note, uid: string): Promise<Note> => {
   const timestamp = serverTimestamp();
   const docRef = doc(notesCollection);
   await setDoc(docRef, { ...note, uid, timestamp });
   const docSnap = await getDoc(docRef);
-  return { uid: docSnap.id, ...docSnap.data() } as TNote;
+  return { uid: docSnap.id, ...docSnap.data() } as Note;
 };
 
 export const getUserNotes = async (uid: string) => {

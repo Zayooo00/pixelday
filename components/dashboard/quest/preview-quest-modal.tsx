@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import ModalShell from "@/components/common/modal-shell";
 import Spinner from "@/components/common/spinner";
 
-import { TPreviewQuestModalProps } from "@/types/quests";
+import { PreviewQuestModalProps } from "@/types/quests";
 import { deleteQuest, updateQuestStatus } from "@/services/quests";
-import { useToast } from "@/context/ToastContext";
-import { useQuests } from "@/context/QuestsContext";
+import { useToast } from "@/context/toast-context";
+import { useQuests } from "@/context/quests-context";
 import { cn } from "@/helpers/cn";
 
 function getQuestColor(
@@ -28,7 +28,7 @@ export default function PreviewQuestModal({
   onClose,
   selectedQuest: initialSelectedQuest,
   onQuestUpdate,
-}: TPreviewQuestModalProps) {
+}: PreviewQuestModalProps) {
   const [selectedQuest, setSelectedQuest] = useState(initialSelectedQuest);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);

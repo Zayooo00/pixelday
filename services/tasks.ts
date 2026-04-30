@@ -1,4 +1,4 @@
-import { db } from "@/firebase/firebase";
+﻿import { db } from "@/firebase/firebase";
 import {
   collection,
   doc,
@@ -10,19 +10,19 @@ import {
   where,
   updateDoc,
 } from "firebase/firestore";
-import { TTask } from "@/types/tasks";
+import { Task } from "@/types/tasks";
 
 const tasksCollection = collection(db, "tasks");
 
-export const createTask = async (task: TTask): Promise<TTask> => {
+export const createTask = async (task: Task): Promise<Task> => {
   const docRef = doc(tasksCollection);
   const taskId = docRef.id;
   await setDoc(docRef, { ...task, taskId });
   const docSnap = await getDoc(docRef);
-  return { id: docSnap.id, ...(docSnap.data() as Partial<TTask>) } as TTask;
+  return { id: docSnap.id, ...(docSnap.data() as Partial<Task>) } as Task;
 };
 
-export const getUserTasks = async (uid: string): Promise<TTask[]> => {
+export const getUserTasks = async (uid: string): Promise<Task[]> => {
   const q = query(
     tasksCollection,
     where("uid", "==", uid),
@@ -32,13 +32,13 @@ export const getUserTasks = async (uid: string): Promise<TTask[]> => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((doc) => ({
     id: doc.id,
-    ...(doc.data() as TTask),
+    ...(doc.data() as Task),
   }));
 };
 
 export const updateTask = async (
   taskId: string,
-  newTaskData: Partial<TTask>,
+  newTaskData: Partial<Task>,
 ): Promise<void> => {
   const taskRef = doc(db, "tasks", taskId);
   await updateDoc(taskRef, newTaskData);

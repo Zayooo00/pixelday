@@ -4,22 +4,22 @@ import SectionHeader from "@/components/common/section-header";
 
 import PreviewQuestModal from "./preview-quest-modal";
 import { QuestPlaceholder } from "./quest-placeholder";
-import Quest from "./quest";
+import QuestCard from "./quest-card";
 
-import { TUserInfo } from "@/types/users";
-import { TQuest } from "@/types/quests";
+import { UserInfo } from "@/types/users";
+import { Quest } from "@/types/quests";
 import { getUserQuests } from "@/services/quests";
-import { useQuests } from "@/context/QuestsContext";
+import { useQuests } from "@/context/quests-context";
 
 type QuestGroup = {
   heading: string;
-  quests: TQuest[];
+  quests: Quest[];
 };
 
-function groupQuests(quests: TQuest[]): QuestGroup[] {
-  const main: TQuest[] = [];
-  const recurring: TQuest[] = [];
-  const complete: TQuest[] = [];
+function groupQuests(quests: Quest[]): QuestGroup[] {
+  const main: Quest[] = [];
+  const recurring: Quest[] = [];
+  const complete: Quest[] = [];
 
   for (const quest of quests) {
     if (quest.status === "complete") {
@@ -58,9 +58,9 @@ function QuestLoadingState() {
 export default function QuestSection({
   currentUser,
 }: {
-  currentUser: TUserInfo;
+  currentUser: UserInfo;
 }) {
-  const [selectedQuest, setSelectedQuest] = useState<TQuest | null>(null);
+  const [selectedQuest, setSelectedQuest] = useState<Quest | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPreviewQuestModalOpen, setIsPreviewQuestModalOpen] = useState(false);
   const { quests, setQuests } = useQuests();
@@ -72,7 +72,7 @@ export default function QuestSection({
       }
       setIsLoading(true);
       const fetched = await getUserQuests(currentUser.uid);
-      setQuests(fetched as TQuest[]);
+      setQuests(fetched as Quest[]);
       setIsLoading(false);
     };
 
@@ -82,7 +82,7 @@ export default function QuestSection({
 
   const groups = useMemo(() => groupQuests(quests), [quests]);
 
-  const handleQuestUpdate = (updatedQuest: TQuest) => {
+  const handleQuestUpdate = (updatedQuest: Quest) => {
     setSelectedQuest(updatedQuest);
     setQuests((prev) =>
       prev.map((quest) =>
@@ -91,7 +91,7 @@ export default function QuestSection({
     );
   };
 
-  const handleQuestClick = (quest: TQuest) => {
+  const handleQuestClick = (quest: Quest) => {
     setSelectedQuest(quest);
     setIsPreviewQuestModalOpen(true);
   };
@@ -117,7 +117,7 @@ export default function QuestSection({
                   key={quest.questId}
                   onClick={() => handleQuestClick(quest)}
                 >
-                  <Quest
+                  <QuestCard
                     title={quest.title}
                     type={quest.type}
                     status={quest.status}

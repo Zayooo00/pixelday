@@ -11,18 +11,18 @@ import PreviewNoteModal from "./preview-note-modal";
 import { NotePlaceholder } from "./note-placeholder";
 
 import { getUserNotes } from "@/services/notes";
-import { TNote } from "@/types/notes";
-import { TUserInfo } from "@/types/users";
+import { Note } from "@/types/notes";
+import { UserInfo } from "@/types/users";
 
 const NOTE_COLORS = ["bg-red-500", "bg-emerald-500", "bg-rose-400"];
 
 export default function NoteSection({
   currentUser,
 }: {
-  currentUser: TUserInfo;
+  currentUser: UserInfo;
 }) {
-  const [notes, setNotes] = useState<TNote[]>([]);
-  const [selectedNote, setSelectedNote] = useState<TNote | null>(null);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] = useState(false);
   const [isPreviewNoteModalOpen, setIsPreviewNoteModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,12 +41,12 @@ export default function NoteSection({
     fetchNotes();
   }, [currentUser.uid]);
 
-  const handleNoteClick = (note: TNote) => {
+  const handleNoteClick = (note: Note) => {
     setSelectedNote(note);
     setIsPreviewNoteModalOpen(true);
   };
 
-  const handleNoteCreated = (newNote: TNote) => {
+  const handleNoteCreated = (newNote: Note) => {
     setNotes((prev) => [...prev, newNote]);
   };
 

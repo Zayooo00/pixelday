@@ -1,6 +1,6 @@
-import { User } from "firebase/auth";
+﻿import { User } from "firebase/auth";
 
-export type TUserInfo = {
+export type UserInfo = {
   currentUser: User | null;
   displayName?: string;
   uid: string;

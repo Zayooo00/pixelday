@@ -11,14 +11,14 @@ import WeekSection from "@/components/dashboard/week/week-section";
 import QuestSection from "@/components/dashboard/quest/quest-section";
 import Toast from "@/components/common/toast";
 
-import { TUserInfo } from "@/types/users";
+import { UserInfo } from "@/types/users";
 import { auth } from "@/firebase/firebase";
-import { QuestProvider } from "@/context/QuestsContext";
-import { TaskProvider } from "@/context/TasksContext";
-import { useToast } from "@/context/ToastContext";
+import { QuestProvider } from "@/context/quests-context";
+import { TaskProvider } from "@/context/tasks-context";
+import { useToast } from "@/context/toast-context";
 
 export default function Dashboard() {
-  const [currentUser, setCurrentUser] = useState<TUserInfo>({
+  const [currentUser, setCurrentUser] = useState<UserInfo>({
     currentUser: null,
     uid: "",
   });

@@ -1,6 +1,6 @@
-export type QuestStatus = "active" | "complete";
+﻿export type QuestStatus = "active" | "complete";
 
-export type TQuest = {
+export type Quest = {
   questId: string;
   title: string;
   status: QuestStatus;
@@ -8,29 +8,29 @@ export type TQuest = {
   type: "main" | "recurring";
 };
 
-export type TQuestProps = {
+export type QuestProps = {
   title: string;
   status: QuestStatus;
   type: "main" | "recurring";
 };
 
-export type TQuestColorType = {
+export type QuestColorType = {
   active: string;
   complete: string;
 };
 
-export type TPreviewQuestModalProps = {
+export type PreviewQuestModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  selectedQuest: TQuest | null;
-  onQuestUpdate: (updatedQuest: TQuest) => void;
+  selectedQuest: Quest | null;
+  onQuestUpdate: (updatedQuest: Quest) => void;
 };
 
-export type TQuestType = "main" | "recurring";
+export type QuestType = "main" | "recurring";
 
-export type TCreateQuestModalProps = {
+export type CreateQuestModalProps = {
   isOpen: boolean;
   onClose: () => void;
   uid: string;
-  questType: TQuestType;
+  questType: QuestType;
 };

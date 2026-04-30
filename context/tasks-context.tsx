@@ -1,8 +1,8 @@
-import { TTask } from "@/types/tasks";
+﻿import { Task } from "@/types/tasks";
 import { createListContext } from "./create-list-context";
 
 const { Provider: TaskProvider, useList: _useTasks } =
-  createListContext<TTask>("Tasks");
+  createListContext<Task>("Tasks");
 
 export { TaskProvider };
 

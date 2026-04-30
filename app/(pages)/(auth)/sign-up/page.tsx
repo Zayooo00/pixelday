@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,10 +7,22 @@ import { updateProfile } from "firebase/auth";
 
 import Spinner from "@/components/common/spinner";
 
-import { SignUpSchema } from "@/helpers/signUpValidator";
+import { z } from "zod";
 import { createUserDocument } from "@/services/users";
+
+const SignUpSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email field can't be empty")
+    .email("Invalid email address"),
+  username: z
+    .string()
+    .min(4, "Username must be longer than 4 characters")
+    .regex(/^[a-zA-Z0-9]+$/, "Username can't have special characters"),
+  password: z.string().min(8, "Password must have at least 8 characters"),
+});
 import { auth, createUserWithEmailAndPassword } from "@/firebase/firebase";
-import { ERROR_EMAIL_ALREADY_IN_USE } from "@/constants/firebaseErrorCodes";
+import { ERROR_EMAIL_ALREADY_IN_USE } from "@/constants/firebase-error-codes";
 
 export default function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
