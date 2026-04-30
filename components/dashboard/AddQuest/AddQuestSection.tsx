@@ -1,58 +1,60 @@
 import { useState } from "react";
-import { GiJusticeStar } from "react-icons/gi";
+
+import SectionHeader from "@/components/common/SectionHeader";
 
 import { TUserInfo } from "@/types/users";
+import { TQuestType } from "@/types/quests";
 
 import CreateQuestModal from "./CreateQuestModal";
-import CreateRecurringQuestModal from "./CreateRecurringQuestModal";
+
+const QUEST_BUTTONS: {
+  type: TQuestType;
+  label: string;
+  className: string;
+}[] = [
+  {
+    type: "main",
+    label: "Add Quest",
+    className: "border-red-900 bg-red-500 text-stroke-red",
+  },
+  {
+    type: "recurring",
+    label: "Add Recurring Quest",
+    className: "border-rose-900 bg-rose-300 text-stroke-rose",
+  },
+];
 
 export default function AddQuestSection({
   currentUser,
 }: {
   currentUser: TUserInfo;
 }) {
-  const [isQuestModalOpen, setIsQuestModalOpen] = useState(false);
-  const [isRecurringQuestModalOpen, setIsRecurringQuestModalOpen] =
-    useState(false);
+  const [openType, setOpenType] = useState<TQuestType | null>(null);
 
   return (
     <>
-      <div className="mt-[44px] flex items-center border-x-[10px] border-t-[10px] border-red-900 bg-amber-50 p-2 md:mt-[58px] lg:-mt-[30px]">
-        <GiJusticeStar className="mr-2 border-2 border-red-900 bg-white text-3xl text-red-900" />
-        <h1 className="w-full border-2 border-red-900 bg-white pl-2 text-xl text-red-900">
-          Add quests
-        </h1>
-      </div>
+      <SectionHeader
+        title="Add quests"
+        className="mt-[44px] md:mt-[58px] lg:-mt-[30px]"
+      />
       <div className="flex h-3/4 flex-col items-center justify-center space-y-2 border-[10px] border-red-900 bg-amber-50 lg:h-[200px]">
-        <button className="w-4/5 transform border-x-4 border-b-8 border-t-4 border-red-900 bg-red-500 p-2 text-2xl text-amber-50 transition-transform duration-300 hover:scale-105">
-          <h1
-            className="text-md text-stroke-red lg:text-[1.2dvw] xl:text-2xl"
-            onClick={() => setIsQuestModalOpen(true)}
+        {QUEST_BUTTONS.map(({ type, label, className }) => (
+          <button
+            key={type}
+            type="button"
+            onClick={() => setOpenType(type)}
+            className={`w-4/5 transform border-x-4 border-b-8 border-t-4 p-2 text-2xl text-amber-50 transition-transform duration-300 hover:scale-105 ${className}`}
           >
-            Add Quest
-          </h1>
-        </button>
-        <button className="w-4/5 transform border-x-4 border-b-8 border-t-4 border-rose-900 bg-rose-300 p-2 text-2xl text-amber-50 transition-transform duration-300 hover:scale-105">
-          <h1
-            className="text-md text-stroke-rose lg:text-[1.2dvw] xl:text-2xl"
-            onClick={() => setIsRecurringQuestModalOpen(true)}
-          >
-            Add Recurring Quest
-          </h1>
-        </button>
+            <h1 className="text-md lg:text-[1.2dvw] xl:text-2xl">{label}</h1>
+          </button>
+        ))}
       </div>
-      {isQuestModalOpen && (
+      {openType && (
         <CreateQuestModal
-          isOpen={isQuestModalOpen}
-          onClose={() => setIsQuestModalOpen(false)}
+          isOpen={openType !== null}
+          onClose={() => setOpenType(null)}
           uid={currentUser.uid}
-        />
-      )}
-      {isRecurringQuestModalOpen && (
-        <CreateRecurringQuestModal
-          isOpen={isRecurringQuestModalOpen}
-          onClose={() => setIsRecurringQuestModalOpen(false)}
-          uid={currentUser.uid}
+          questType={openType}
         />
       )}
     </>

@@ -26,8 +26,11 @@ export type TPreviewQuestModalProps = {
   onQuestUpdate: (updatedQuest: TQuest) => void;
 };
 
+export type TQuestType = "main" | "recurring";
+
 export type TCreateQuestModalProps = {
   isOpen: boolean;
   onClose: () => void;
   uid: string;
+  questType: TQuestType;
 };
